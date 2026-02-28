@@ -3,50 +3,78 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>EMY Beauty Studio</title>
+    <title>EMYbeauty Studio</title>
     <link rel="stylesheet" href="css/style.css">
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Montserrat:wght@300;400&display=swap" rel="stylesheet">
 </head>
 <body>
 
-    <header class="topbar">
-        <div class="brand-area">
-            <button class="menu-toggle" id="menuToggle">☰</button>
-            <div class="logo-text">
-                <span class="emy-big">EMY</span><span class="beauty-small">beauty studio</span>
-            </div>
-        </div>
-        
-        <nav class="top-links">
-            <a href="#">Контакти</a>
-            <a href="#">Чат</a>
-            <a href="#">Instagram</a>
-        </nav>
-    </header>
+<div class="topbar">
+  <div class="brand">EMYbeauty Studio</div>
+  <div class="top-links">
+    <a href="#">Facebook</a>
+    <a href="#">Instagram</a>
+    <a href="#">Viber</a>
+    <a href="#">TikTok</a>
+    <a href="#">WhatsApp</a>
+    <a href="#">Отзиви</a>
+  </div>
+</div>
 
-    <aside class="side-menu" id="sideMenu">
-        <nav class="menu-content">
-            <button>Маникюр</button>
-            <button>Прически</button>
-            <button>Масажи</button>
-            <button>СПА</button>
-        </nav>
-    </aside>
+<div class="container">
+  <div class="side-menu">
+    <div class="menu-tab" onclick="toggleTab(this)">
+      Процедури
+      <div class="menu-content">
+        Маникюр<br>Масаж<br>СПА<br>Прически
+      </div>
+    </div>
+    <div class="menu-tab" onclick="toggleTab(this)">
+      Пазар
+      <div class="menu-content">
+        Козметика<br>Аксесоари<br>Ваучери
+      </div>
+    </div>
+  </div>
 
-    <main class="container">
-        <section class="calendar-section">
-            <div class="calendar-nav">
-                <button id="prevMonth" class="cal-btn">‹</button>
-                <h2 id="monthDisplay"></h2>
-                <button id="nextMonth" class="cal-btn">›</button>
-            </div>
-            <div class="weekdays">
-                <div>пн</div><div>вт</div><div>ср</div><div>чт</div><div>пт</div><div class="wknd">сб</div><div class="wknd">нд</div>
-            </div>
-            <div id="calendar" class="days-grid"></div>
-        </section>
-    </main>
+  <div class="calendar-section">
+    <div class="calendar-header">
+      <button onclick="changeMonth(-1)">◀</button>
+      <div id="monthYear"></div>
+      <button onclick="changeMonth(1)">▶</button>
+    </div>
+    <div class="calendar" id="calendar"></div>
+  </div>
+</div>
 
-    <script src="js/script.js"></script>
+<div class="modal" id="modal">
+  <div class="modal-content">
+    <h3>Запази час</h3>
+    <select>
+      <option>Маникюр</option>
+      <option>Масаж</option>
+      <option>СПА</option>
+    </select>
+    <input type="time">
+    <button onclick="closeModal()">Потвърди</button>
+  </div>
+</div>
+
+<section class="gallery">
+  <div class="gallery-track" id="track">
+    <img src="assets/images/photo1.jpg">
+    <img src="assets/images/photo2.jpg">
+    <img src="assets/images/photo3.jpg">
+    <img src="assets/images/photo4.jpg">
+    <img src="assets/images/photo5.jpg">
+  </div>
+</section>
+
+<section class="reviews">
+  <h2>Отзиви</h2>
+  <p>„Изключително обслужване!“</p>
+  <p>„Най-доброто студио в града.“</p>
+</section>
+
+<script src="js/script.js"></script>
 </body>
 </html>

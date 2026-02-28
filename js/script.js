@@ -1,42 +1,55 @@
-document.addEventListener("DOMContentLoaded", () => {
-    // Управление на страничното меню
-    const menuToggle = document.getElementById("menuToggle");
-    const sideMenu = document.getElementById("sideMenu");
-    
-    if (menuToggle && sideMenu) {
-        menuToggle.onclick = () => sideMenu.classList.toggle("active");
-    }
+let currentDate = new Date();
+const calendar = document.getElementById("calendar");
+const monthYear = document.getElementById("monthYear");
 
-    // Логика за календара
-    const grid = document.getElementById("calendar");
-    const label = document.getElementById("monthDisplay");
-    let d = new Date();
+function renderCalendar(){
+  calendar.innerHTML="";
+  const year = currentDate.getFullYear();
+  const month = currentDate.getMonth();
+  
+  // Показваме месеца на български
+  monthYear.textContent = currentDate.toLocaleDateString('bg-BG',{month:'long',year:'numeric'});
 
-    function render() {
-        if (!grid || !label) return;
-        grid.innerHTML = "";
-        const y = d.getFullYear();
-        const m = d.getMonth();
-        label.innerText = new Intl.DateTimeFormat('bg-BG', { month: 'long', year: 'numeric' }).format(d);
+  const days = new Date(year,month+1,0).getDate();
 
-        const first = new Date(y, m, 1).getDay();
-        const total = new Date(y, m + 1, 0).getDate();
-        
-        // Настройка за понеделник като първи ден
-        let gap = first === 0 ? 6 : first - 1;
+  for(let i=1;i<=days;i++){
+    const day = document.createElement("div");
+    day.className="day";
+    day.innerHTML=`<div class="day-number">${i}</div>`;
+    day.onclick=()=>openModal();
+    calendar.appendChild(day);
+  }
+}
 
-        for (let i = 0; i < gap; i++) grid.appendChild(document.createElement("div"));
+function changeMonth(dir){
+  currentDate.setMonth(currentDate.getMonth()+dir);
+  renderCalendar();
+}
 
-        for (let i = 1; i <= total; i++) {
-            const cell = document.createElement("div");
-            cell.className = "day";
-            cell.innerText = i;
-            grid.appendChild(cell);
-        }
-    }
+function toggleTab(tab){
+  const content = tab.querySelector(".menu-content");
+  content.style.display = content.style.display === "block" ? "none" : "block";
+}
 
-    document.getElementById("prevMonth").onclick = () => { d.setMonth(d.getMonth() - 1); render(); };
-    document.getElementById("nextMonth").onclick = () => { d.setMonth(d.getMonth() + 1); render(); };
-    
-    render();
-});
+function openModal(){
+  document.getElementById("modal").style.display="flex";
+}
+
+function closeModal(){
+  document.getElementById("modal").style.display="none";
+}
+
+/* Автоматична ротация на галерията */
+let index = 0;
+const track = document.getElementById("track");
+
+setInterval(()=>{
+  const imagesCount = track.children.length;
+  index++;
+  if(index >= imagesCount) index = 0;
+  // 320px е широчината на снимката (300px) + разстоянието (20px)
+  track.style.transform = `translateX(-${index * 320}px)`;
+}, 3000);
+
+// Стартираме календара при зареждане
+renderCalendar();
