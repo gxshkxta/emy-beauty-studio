@@ -1,50 +1,42 @@
 document.addEventListener("DOMContentLoaded", () => {
     const menuToggle = document.getElementById("menuToggle");
-    const sideMenu = document.getElementById("sideMenu");
+    const sidebar = document.getElementById("sidebar");
 
-    // Отваряне/Затваряне на менюто
-    menuToggle.addEventListener("click", () => {
-        sideMenu.classList.toggle("active");
-    });
+    menuToggle.onclick = () => sidebar.classList.toggle("open");
 
-    const calendar = document.getElementById("calendar");
-    const monthDisplay = document.getElementById("monthDisplay");
-    let currentDate = new Date();
+    const daysGrid = document.getElementById("daysGrid");
+    const monthTitle = document.getElementById("monthTitle");
+    let viewDate = new Date();
 
-    function renderCalendar() {
-        calendar.innerHTML = "";
-        const year = currentDate.getFullYear();
-        const month = currentDate.getMonth();
+    function draw() {
+        daysGrid.innerHTML = "";
+        const year = viewDate.getFullYear();
+        const month = viewDate.getMonth();
+        
+        monthTitle.innerText = new Intl.DateTimeFormat('bg-BG', { month: 'long', year: 'numeric' }).format(viewDate);
 
-        monthDisplay.innerText = new Intl.DateTimeFormat('bg-BG', { month: 'long', year: 'numeric' }).format(currentDate);
-
-        const firstDayOfMonth = new Date(year, month, 1).getDay();
+        const firstDay = new Date(year, month, 1).getDay();
         const daysInMonth = new Date(year, month + 1, 0).getDate();
+        
+        let offset = firstDay === 0 ? 6 : firstDay - 1;
 
-        // Превръщаме Неделя (0) в 6, а Понеделник в 0
-        let startDay = firstDayOfMonth === 0 ? 6 : firstDayOfMonth - 1;
-
-        // Празни клетки
-        for (let i = 0; i < startDay; i++) {
-            const empty = document.createElement("div");
-            calendar.appendChild(empty);
+        for (let i = 0; i < offset; i++) {
+            daysGrid.appendChild(document.createElement("div"));
         }
 
-        // Дните от месеца
         for (let i = 1; i <= daysInMonth; i++) {
             const day = document.createElement("div");
-            day.className = "day";
+            day.className = "day-cell";
             day.innerText = i;
             
-            const d = new Date(year, month, i).getDay();
-            if (d === 0 || d === 6) day.classList.add("weekend");
+            const dow = new Date(year, month, i).getDay();
+            if (dow === 0 || dow === 6) day.classList.add("sun");
             
-            calendar.appendChild(day);
+            daysGrid.appendChild(day);
         }
     }
 
-    document.getElementById("prevMonth").onclick = () => { currentDate.setMonth(currentDate.getMonth() - 1); renderCalendar(); };
-    document.getElementById("nextMonth").onclick = () => { currentDate.setMonth(currentDate.getMonth() + 1); renderCalendar(); };
-
-    renderCalendar();
+    document.getElementById("prev").onclick = () => { viewDate.setMonth(viewDate.getMonth() - 1); draw(); };
+    document.getElementById("next").onclick = () => { viewDate.setMonth(viewDate.getMonth() + 1); draw(); };
+    draw();
 });

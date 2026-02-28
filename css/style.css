@@ -1,121 +1,80 @@
 :root {
     --gold: #d4af37;
-    --text-muted: rgba(255, 255, 255, 0.4);
+    --dark: #0a0a0a;
+    --glass: rgba(255, 255, 255, 0.03);
+    --muted: rgba(255, 255, 255, 0.4);
 }
 
 body {
-    margin: 0;
-    background-color: #0a0a0a;
-    color: white;
-    font-family: 'Montserrat', sans-serif;
+    margin: 0; background: var(--dark); color: white;
+    font-family: 'Montserrat', sans-serif; overflow-x: hidden;
 }
 
-/* Лого: EMY голямо, останалото приглушено */
-.emy-big {
-    font-family: 'Playfair Display', serif;
-    font-size: 2.5rem;
-    color: var(--gold);
-    margin-right: 10px;
+.emy-logo {
+    font-family: 'Playfair Display', serif; font-size: 2.5rem;
+    color: var(--gold); font-style: italic; margin-right: 10px;
 }
 
 .brand {
-    font-size: 1.1rem;
-    color: var(--text-muted);
-    display: flex;
-    align-items: baseline;
-    text-transform: lowercase;
+    display: flex; align-items: baseline; font-size: 1.1rem;
+    letter-spacing: 2px; color: var(--muted); text-transform: lowercase;
 }
 
 .topbar {
-    display: flex;
-    justify-content: space-between;
-    padding: 20px 40px;
-    background: rgba(0,0,0,0.9);
-    align-items: center;
+    display: flex; justify-content: space-between; align-items: center;
+    padding: 20px 40px; background: rgba(0,0,0,0.8); backdrop-filter: blur(10px);
+    border-bottom: 1px solid rgba(255,255,255,0.05); position: sticky; top: 0; z-index: 100;
 }
 
-/* Меню */
-.side-menu {
-    position: fixed;
-    left: -260px;
-    top: 0;
-    height: 100%;
-    width: 250px;
-    background: #111;
-    transition: 0.4s;
-    z-index: 1000;
-    padding-top: 80px;
+.links a {
+    color: white; text-decoration: none; margin-left: 20px;
+    font-size: 0.8rem; text-transform: uppercase; letter-spacing: 1px;
+    padding: 8px 15px; border: 1px solid rgba(255,255,255,0.1); transition: 0.3s;
 }
 
-.side-menu.active {
-    left: 0;
+.links a:hover { border-color: var(--gold); color: var(--gold); }
+
+.sidebar {
+    position: fixed; left: -280px; top: 0; width: 250px; height: 100%;
+    background: #111; transition: 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    z-index: 90; padding-top: 100px; border-right: 1px solid var(--glass);
 }
 
-.menu-toggle {
-    background: none;
-    border: none;
-    color: var(--gold);
-    font-size: 2rem;
-    cursor: pointer;
+.sidebar.open { left: 0; }
+
+.menu-btn {
+    background: none; border: none; color: var(--gold);
+    font-size: 1.8rem; cursor: pointer; margin-right: 20px;
 }
 
-/* Календар - ГРИД система */
-.calendar-section {
-    max-width: 1000px;
-    margin: 50px auto;
-    padding: 0 20px;
+/* Календар */
+.calendar-card {
+    max-width: 800px; margin: 60px auto; padding: 30px;
+    background: var(--glass); border-radius: 15px;
 }
 
-.weekdays-grid {
-    display: grid;
-    grid-template-columns: repeat(7, 1fr);
-    text-align: center;
-    color: var(--text-muted);
-    font-weight: bold;
-    margin-bottom: 15px;
+.cal-header {
+    display: flex; justify-content: center; align-items: center;
+    gap: 40px; margin-bottom: 40px;
 }
 
-.calendar {
-    display: grid;
-    grid-template-columns: repeat(7, 1fr);
-    gap: 10px;
+.circle-btn {
+    background: none; border: 1px solid var(--gold); color: var(--gold);
+    width: 40px; height: 40px; border-radius: 50%; cursor: pointer; font-size: 1.2rem;
 }
 
-.day {
-    aspect-ratio: 1.2;
-    background: rgba(255, 255, 255, 0.03);
-    border: 1px solid rgba(255, 255, 255, 0.05);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 1.2rem;
-    color: rgba(255, 255, 255, 0.6); /* Прозрачни цифри */
-    transition: 0.3s;
+.week-labels {
+    display: grid; grid-template-columns: repeat(7, 1fr);
+    text-align: center; color: var(--muted); margin-bottom: 20px; font-weight: bold;
 }
 
-.day.weekend {
-    color: rgba(255, 255, 255, 0.15); /* Много бледи уикенди */
+.days-grid { display: grid; grid-template-columns: repeat(7, 1fr); gap: 10px; }
+
+.day-cell {
+    aspect-ratio: 1; display: flex; align-items: center; justify-content: center;
+    background: rgba(255,255,255,0.02); border-radius: 5px; font-size: 1.1rem;
+    color: rgba(255,255,255,0.8); cursor: pointer; transition: 0.2s;
 }
 
-.day:hover {
-    border-color: var(--gold);
-    color: var(--gold);
-}
-
-.calendar-nav {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 30px;
-    margin-bottom: 30px;
-}
-
-.round-btn {
-    background: none;
-    border: 1px solid var(--gold);
-    color: var(--gold);
-    border-radius: 50%;
-    width: 40px;
-    height: 40px;
-    cursor: pointer;
-}
+.day-cell:hover { background: rgba(212, 175, 55, 0.1); color: var(--gold); }
+.sun { color: rgba(255,255,255,0.15) !important; }
