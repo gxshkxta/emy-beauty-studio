@@ -1,112 +1,31 @@
 :root {
-    --gold: #d4af37; /* Оригинално златно */
-    --bg-dark: #0a0a0a; /* Луксозно черно */
-    --muted-text: rgba(255, 255, 255, 0.4); /* Приглушен текст */
+    --gold: #d4af37; 
+    --bg: #0a0a0a;
 }
 
 body {
-    margin: 0;
-    background-color: var(--bg-dark);
-    color: white;
+    margin: 0; background-color: var(--bg); color: white;
     font-family: 'Montserrat', sans-serif;
 }
 
-/* Лентата с логото и менюто на един ред */
+/* Меню и Лого на един ред */
 .topbar {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 15px 30px;
-    background: rgba(0,0,0,0.95);
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 15px 30px; background: rgba(0,0,0,0.95);
     border-bottom: 1px solid rgba(212, 175, 55, 0.2);
 }
 
-.brand-area {
-    display: flex;
-    align-items: center;
-    gap: 15px;
-}
+.brand-area { display: flex; align-items: center; gap: 15px; }
 
-/* Дизайн на името */
 .emy-big {
-    font-family: 'Playfair Display', serif;
-    font-size: 2.5rem; /* Уголемено EMY */
-    color: var(--gold);
-    line-height: 1;
+    font-family: 'Playfair Display', serif; font-size: 2.5rem;
+    color: var(--gold); line-height: 1; font-weight: bold;
 }
 
-.beauty-small {
-    font-size: 1.1rem;
-    color: var(--muted-text);
-    margin-left: 8px;
-    letter-spacing: 1px;
-    text-transform: lowercase;
-}
+.beauty-small { font-size: 1.1rem; color: rgba(255,255,255,0.4); margin-left: 8px; }
 
-.menu-toggle {
-    background: none;
-    border: none;
-    color: var(--gold);
-    font-size: 2.2rem;
-    cursor: pointer;
-    padding: 0;
-}
-
-/* Бутони вдясно */
-.top-links a {
-    color: white;
-    text-decoration: none;
-    margin-left: 15px;
-    font-size: 0.8rem;
-    text-transform: uppercase;
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    padding: 6px 14px;
-    transition: 0.3s;
-}
-
-.top-links a:hover {
-    border-color: var(--gold);
-    color: var(--gold);
-}
+.menu-toggle { background: none; border: none; color: var(--gold); font-size: 2.2rem; cursor: pointer; }
 
 /* Календар */
-.calendar-section {
-    max-width: 900px;
-    margin: 50px auto;
-    padding: 20px;
-}
-
-.days-grid {
-    display: grid;
-    grid-template-columns: repeat(7, 1fr);
-    gap: 10px;
-}
-
-.day {
-    aspect-ratio: 1.2;
-    background: rgba(255, 255, 255, 0.03);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: rgba(255, 255, 255, 0.7);
-}
-
-.wknd { color: var(--muted-text); }
-
-/* Странично меню */
-.side-menu {
-    position: fixed;
-    left: -280px;
-    top: 0;
-    width: 250px;
-    height: 100%;
-    background: #111;
-    transition: 0.4s ease-in-out;
-    z-index: 1000;
-    padding-top: 100px;
-    border-right: 1px solid rgba(212, 175, 55, 0.1);
-}
-
-.side-menu.active {
-    left: 0;
-}
+.days-grid { display: grid; grid-template-columns: repeat(7, 1fr); gap: 10px; }
+.day { aspect-ratio: 1.2; background: rgba(255,255,255,0.03); display: flex; align-items: center; justify-content: center; }
