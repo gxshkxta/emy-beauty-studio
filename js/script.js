@@ -1,42 +1,36 @@
 document.addEventListener("DOMContentLoaded", () => {
+    // Отваряне на менюто
     const menuToggle = document.getElementById("menuToggle");
-    const sidebar = document.getElementById("sidebar");
+    const sideMenu = document.getElementById("sideMenu");
+    
+    menuToggle.onclick = () => sideMenu.classList.toggle("active");
 
-    menuToggle.onclick = () => sidebar.classList.toggle("open");
+    // Календар
+    const grid = document.getElementById("calendar");
+    const label = document.getElementById("monthDisplay");
+    let d = new Date();
 
-    const daysGrid = document.getElementById("daysGrid");
-    const monthTitle = document.getElementById("monthTitle");
-    let viewDate = new Date();
+    function render() {
+        grid.innerHTML = "";
+        const y = d.getFullYear();
+        const m = d.getMonth();
+        label.innerText = new Intl.DateTimeFormat('bg-BG', { month: 'long', year: 'numeric' }).format(d);
 
-    function draw() {
-        daysGrid.innerHTML = "";
-        const year = viewDate.getFullYear();
-        const month = viewDate.getMonth();
-        
-        monthTitle.innerText = new Intl.DateTimeFormat('bg-BG', { month: 'long', year: 'numeric' }).format(viewDate);
+        const first = new Date(y, m, 1).getDay();
+        const total = new Date(y, m + 1, 0).getDate();
+        let gap = first === 0 ? 6 : first - 1;
 
-        const firstDay = new Date(year, month, 1).getDay();
-        const daysInMonth = new Date(year, month + 1, 0).getDate();
-        
-        let offset = firstDay === 0 ? 6 : firstDay - 1;
+        for (let i = 0; i < gap; i++) grid.appendChild(document.createElement("div"));
 
-        for (let i = 0; i < offset; i++) {
-            daysGrid.appendChild(document.createElement("div"));
-        }
-
-        for (let i = 1; i <= daysInMonth; i++) {
-            const day = document.createElement("div");
-            day.className = "day-cell";
-            day.innerText = i;
-            
-            const dow = new Date(year, month, i).getDay();
-            if (dow === 0 || dow === 6) day.classList.add("sun");
-            
-            daysGrid.appendChild(day);
+        for (let i = 1; i <= total; i++) {
+            const cell = document.createElement("div");
+            cell.className = "day";
+            cell.innerText = i;
+            grid.appendChild(cell);
         }
     }
 
-    document.getElementById("prev").onclick = () => { viewDate.setMonth(viewDate.getMonth() - 1); draw(); };
-    document.getElementById("next").onclick = () => { viewDate.setMonth(viewDate.getMonth() + 1); draw(); };
-    draw();
+    document.getElementById("prevMonth").onclick = () => { d.setMonth(d.getMonth() - 1); render(); };
+    document.getElementById("nextMonth").onclick = () => { d.setMonth(d.getMonth() + 1); render(); };
+    render();
 });

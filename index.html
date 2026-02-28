@@ -5,41 +5,45 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>EMY Beauty Studio</title>
     <link rel="stylesheet" href="css/style.css">
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;1,700&family=Montserrat:wght@300;400&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Montserrat:wght@300;400&display=swap" rel="stylesheet">
 </head>
 <body>
+
     <header class="topbar">
-        <div class="logo-area">
-            <button class="menu-btn" id="menuToggle">☰</button>
-            <div class="brand"><span class="emy-logo">emy</span> beauty studio</div>
+        <div class="brand-area">
+            <button class="menu-toggle" id="menuToggle">☰</button>
+            <div class="logo-text">
+                <span class="emy-big">EMY</span><span class="beauty-small">beauty studio</span>
+            </div>
         </div>
-        <nav class="links">
+        
+        <nav class="top-links">
             <a href="#">Контакти</a>
             <a href="#">Чат</a>
             <a href="#">Instagram</a>
         </nav>
     </header>
 
-    <aside class="sidebar" id="sidebar">
-        <nav class="side-nav">
-            <a href="#">Маникюр</a>
-            <a href="#">Прически</a>
-            <a href="#">Масажи</a>
-            <a href="#">СПА</a>
+    <aside class="side-menu" id="sideMenu">
+        <nav class="menu-content">
+            <button>Маникюр</button>
+            <button>Прически</button>
+            <button>Масажи</button>
+            <button>СПА</button>
         </nav>
     </aside>
 
-    <main class="main-content">
-        <section class="calendar-card">
-            <div class="cal-header">
-                <button id="prev" class="circle-btn">‹</button>
-                <h2 id="monthTitle">Февруари 2026</h2>
-                <button id="next" class="circle-btn">›</button>
+    <main class="container">
+        <section class="calendar-section">
+            <div class="calendar-nav">
+                <button id="prevMonth" class="cal-btn">‹</button>
+                <h2 id="monthDisplay"></h2>
+                <button id="nextMonth" class="cal-btn">›</button>
             </div>
-            <div class="week-labels">
-                <div>пн</div><div>вт</div><div>ср</div><div>чт</div><div>пт</div><div class="sun">сб</div><div class="sun">нд</div>
+            <div class="weekdays">
+                <div>пн</div><div>вт</div><div>ср</div><div>чт</div><div>пт</div><div class="wknd">сб</div><div class="wknd">нд</div>
             </div>
-            <div id="daysGrid" class="days-grid"></div>
+            <div id="calendar" class="days-grid"></div>
         </section>
     </main>
 
