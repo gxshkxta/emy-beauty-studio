@@ -1,16 +1,19 @@
 document.addEventListener("DOMContentLoaded", () => {
-    // Отваряне на менюто
+    // Управление на страничното меню
     const menuToggle = document.getElementById("menuToggle");
     const sideMenu = document.getElementById("sideMenu");
     
-    menuToggle.onclick = () => sideMenu.classList.toggle("active");
+    if (menuToggle && sideMenu) {
+        menuToggle.onclick = () => sideMenu.classList.toggle("active");
+    }
 
-    // Календар
+    // Логика за календара
     const grid = document.getElementById("calendar");
     const label = document.getElementById("monthDisplay");
     let d = new Date();
 
     function render() {
+        if (!grid || !label) return;
         grid.innerHTML = "";
         const y = d.getFullYear();
         const m = d.getMonth();
@@ -18,6 +21,8 @@ document.addEventListener("DOMContentLoaded", () => {
 
         const first = new Date(y, m, 1).getDay();
         const total = new Date(y, m + 1, 0).getDate();
+        
+        // Настройка за понеделник като първи ден
         let gap = first === 0 ? 6 : first - 1;
 
         for (let i = 0; i < gap; i++) grid.appendChild(document.createElement("div"));
@@ -32,5 +37,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
     document.getElementById("prevMonth").onclick = () => { d.setMonth(d.getMonth() - 1); render(); };
     document.getElementById("nextMonth").onclick = () => { d.setMonth(d.getMonth() + 1); render(); };
+    
     render();
 });
