@@ -1,200 +1,88 @@
-*{margin:0;padding:0;box-sizing:border-box;font-family:'Segoe UI',sans-serif;}
-
-body{
-  background:linear-gradient(135deg,#1a0028,#4b0036,#1a0028);
-  background-size:400% 400%;
-  animation:bgMove 18s ease infinite;
-  color:white;
-  overflow-x:hidden;
+/* Основен стил с твоите градиенти */
+body {
+    margin: 0;
+    padding: 0;
+    background: linear-gradient(135deg, #1a0028, #4b0036, #1a0028);
+    background-attachment: fixed;
+    color: white;
+    font-family: 'Segoe UI', sans-serif;
+    overflow-x: hidden;
 }
 
-@keyframes bgMove{
-  0%{background-position:0% 50%;}
-  50%{background-position:100% 50%;}
-  100%{background-position:0% 50%;}
+/* Огромен Календар */
+#calendar-container {
+    min-height: 90vh; /* Почти цял екран */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
 }
 
-/* TOP BAR */
-.topbar{
-  position:fixed;
-  top:0;
-  width:100%;
-  backdrop-filter:blur(15px);
-  background:rgba(255,255,255,0.05);
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-  padding:18px 40px;
-  z-index:1000;
+/* Плаващо Меню (Sidebar) */
+#sidebar {
+    position: fixed;
+    left: -250px; /* Скрито вляво */
+    top: 50%;
+    transform: translateY(-50%);
+    width: 250px;
+    transition: 0.5s;
+    z-index: 1000;
 }
 
-.brand{font-size:22px;font-weight:600;}
-
-.top-links{
-  display:flex;
-  gap:20px;
-  font-size:13px;
+#sidebar.active {
+    left: 20px; /* Излиза напред */
 }
 
-.top-links a{
-  text-decoration:none;
-  color:white;
-  opacity:0.8;
-  transition:.3s;
-}
-.top-links a:hover{color:#ff2e88;opacity:1;}
-
-/* LAYOUT */
-.container{
-  display:flex;
-  min-height:100vh;
-  padding-top:90px;
+.menu-tab {
+    background: rgba(255, 255, 255, 0.1); /* Прозрачен плаващ фон */
+    backdrop-filter: blur(10px);
+    margin-bottom: 10px;
+    padding: 20px;
+    border-radius: 15px;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    cursor: pointer;
+    text-align: center;
 }
 
-/* SIDE TABS */
-.side-menu{
-  width:260px;
-  display:flex;
-  flex-direction:column;
-  justify-content:center;
-  gap:30px;
-  padding-left:40px;
+/* Безкрайна Галерия */
+.gallery-wrapper {
+    overflow: hidden;
+    width: 100%;
+    background: rgba(0,0,0,0.3);
+    padding: 50px 0;
 }
 
-.menu-tab{
-  backdrop-filter:blur(12px);
-  background:rgba(255,255,255,0.08);
-  padding:20px;
-  border-radius:20px;
-  cursor:pointer;
-  transition:.4s;
-  position:relative;
+.gallery-track {
+    display: flex;
+    width: calc(250px * 38); /* 19 снимки х 2 за безкрайност */
+    animation: scroll 40s linear infinite;
 }
 
-.menu-tab:hover{
-  background:rgba(255,255,255,0.18);
-  transform:translateX(8px);
+.gallery-item {
+    width: 200px;
+    height: 250px;
+    margin: 0 25px;
+    background: #333; /* Заместител докато заредиш снимките */
+    border-radius: 10px;
+    flex-shrink: 0;
 }
 
-.menu-content{
-  margin-top:15px;
-  display:none;
-  font-size:14px;
-  opacity:.8;
+@keyframes scroll {
+    0% { transform: translateX(0); }
+    100% { transform: translateX(calc(-250px * 19)); }
 }
 
-/* CALENDAR */
-.calendar-section{
-  flex:1;
-  padding:0 40px;
-  display:flex;
-  flex-direction:column;
-  align-items:center;
-}
-
-.calendar-header{
-  display:flex;
-  justify-content:space-between;
-  width:100%;
-  max-width:900px;
-  margin-bottom:20px;
-  font-size:18px;
-}
-
-.calendar{
-  width:100%;
-  max-width:900px;
-  display:grid;
-  grid-template-columns:repeat(7,1fr);
-  gap:12px;
-  backdrop-filter:blur(20px);
-  background:rgba(255,255,255,0.05);
-  padding:30px;
-  border-radius:25px;
-}
-
-.day{
-  height:80px;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  border-radius:12px;
-  backdrop-filter:blur(8px);
-  background:rgba(255,255,255,0.08);
-  cursor:pointer;
-  transition:.3s;
-}
-
-.day:hover{
-  background:rgba(212,175,55,0.3);
-  transform:scale(1.05);
-}
-
-.day-number{font-size:18px;font-weight:500;}
-
-/* MODAL */
-.modal{
-  position:fixed;
-  inset:0;
-  background:rgba(0,0,0,0.6);
-  display:none;
-  justify-content:center;
-  align-items:center;
-  z-index: 2000;
-}
-
-.modal-content{
-  backdrop-filter:blur(20px);
-  background:rgba(255,255,255,0.1);
-  padding:40px;
-  border-radius:25px;
-  width:350px;
-  text-align: center;
-}
-
-.modal select, .modal input{
-  width:100%;
-  padding:10px;
-  margin:10px 0;
-  border-radius:10px;
-  border:none;
-}
-
-.modal button {
-  padding: 10px 20px;
-  background: #ff2e88;
-  color: white;
-  border: none;
-  border-radius: 10px;
-  cursor: pointer;
-}
-
-/* GALLERY */
-.gallery{
-  margin:100px auto;
-  max-width:900px;
-  overflow:hidden;
-}
-
-.gallery-track{
-  display:flex;
-  transition:transform .6s ease;
-}
-
-.gallery img{
-  width:300px;
-  height:400px;
-  object-fit:cover;
-  margin-right:20px;
-  border-radius:20px;
-}
-
-/* REVIEWS */
-.reviews{
-  max-width:900px;
-  margin:80px auto;
-  backdrop-filter:blur(15px);
-  background:rgba(255,255,255,0.07);
-  padding:40px;
-  border-radius:20px;
+/* Бутон за менюто */
+.menu-btn {
+    position: fixed;
+    left: 20px;
+    top: 20px;
+    z-index: 1001;
+    background: #4b0036;
+    border: none;
+    color: white;
+    padding: 10px 15px;
+    border-radius: 5px;
+    cursor: pointer;
 }

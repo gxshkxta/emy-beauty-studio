@@ -8,74 +8,25 @@
 </head>
 <body>
 
-<div class="topbar">
-  <div class="brand">EMYbeauty Studio</div>
-  <div class="top-links">
-    <a href="#">Facebook</a>
-    <a href="#">Instagram</a>
-    <a href="#">Viber</a>
-    <a href="#">TikTok</a>
-    <a href="#">WhatsApp</a>
-    <a href="#">Отзиви</a>
-  </div>
-</div>
+    <button class="menu-btn" onclick="toggleMenu()">☰ Меню</button>
 
-<div class="container">
-  <div class="side-menu">
-    <div class="menu-tab" onclick="toggleTab(this)">
-      Процедури
-      <div class="menu-content">
-        Маникюр<br>Масаж<br>СПА<br>Прически
-      </div>
+    <div id="sidebar">
+        <div class="menu-tab">📅 Процедури</div>
+        <div class="menu-tab">✨ Услуги</div>
     </div>
 
-    <div class="menu-tab" onclick="toggleTab(this)">
-      Пазар
-      <div class="menu-content">
-        Козметика<br>Аксесоари<br>Ваучери
-      </div>
+    <div id="calendar-container">
+        <h1 style="text-align: center;">EMYbeauty Studio</h1>
+        <div id="calendar-root">
+            </div>
     </div>
-  </div>
 
-  <div class="calendar-section">
-    <div class="calendar-header">
-      <button onclick="changeMonth(-1)">◀</button>
-      <div id="monthYear"></div>
-      <button onclick="changeMonth(1)">▶</button>
+    <div class="gallery-wrapper">
+        <h2 style="text-align: center; margin-bottom: 30px;">Галерия</h2>
+        <div class="gallery-track" id="gallery-track">
+            </div>
     </div>
-    <div class="calendar" id="calendar"></div>
-  </div>
-</div>
 
-<div class="modal" id="modal">
-  <div class="modal-content">
-    <h3>Запази час</h3>
-    <select>
-      <option>Маникюр</option>
-      <option>Масаж</option>
-      <option>СПА</option>
-    </select>
-    <input type="time">
-    <button onclick="closeModal()">Потвърди</button>
-  </div>
-</div>
-
-<section class="gallery">
-  <div class="gallery-track" id="track">
-    <img src="assets/images/photo1.jpg">
-    <img src="assets/images/photo2.jpg">
-    <img src="assets/images/photo3.jpg">
-    <img src="assets/images/photo4.jpg">
-    <img src="assets/images/photo5.jpg">
-  </div>
-</section>
-
-<section class="reviews">
-  <h2>Отзиви</h2>
-  <p>„Изключително обслужване!“</p>
-  <p>„Най-доброто студио в града.“</p>
-</section>
-
-<script src="js/script.js"></script>
+    <script src="js/script.js"></script>
 </body>
 </html>
