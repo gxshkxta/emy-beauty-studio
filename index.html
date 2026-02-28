@@ -1,28 +1,33 @@
-window.onload = function() {
-    console.log("Скриптът е зареден!");
+<!DOCTYPE html>
+<html lang="bg">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EMYbeauty Studio</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
 
-    // Генериране на галерията
-    const track = document.getElementById('gallery-track');
-    if (track) {
-        for (let i = 0; i < 38; i++) {
-            const item = document.createElement('div');
-            item.className = 'gallery-item';
-            item.innerHTML = `<span style="color:white">${(i % 19) + 1}</span>`;
-            track.appendChild(item);
-        }
-    }
+    <button class="menu-btn" onclick="toggleMenu()">☰ Меню</button>
 
-    // Проверка за календара
-    const calendarRoot = document.getElementById('calendar-root');
-    if (calendarRoot) {
-        calendarRoot.innerHTML = "<h2 style='color:white'>Тук ще заредим календара</h2>";
-        // Тук по-късно ще вмъкнем твоя голям календар
-    }
-};
+    <div id="sidebar">
+        <div class="menu-tab">📅 Процедури</div>
+        <div class="menu-tab">✨ Услуги</div>
+    </div>
 
-function toggleMenu() {
-    const sidebar = document.getElementById('sidebar');
-    if (sidebar) {
-        sidebar.classList.toggle('active');
-    }
-}
+    <div id="calendar-container">
+        <h1 style="text-align: center;">EMYbeauty Studio</h1>
+        <div id="calendar-root">
+            </div>
+    </div>
+
+    <div class="gallery-wrapper">
+        <h2 style="text-align: center; margin-bottom: 30px;">Галерия</h2>
+        <div class="gallery-track" id="gallery-track">
+            </div>
+    </div>
+
+    <script src="js/script.js"></script>
+
+</body>
+</html>
