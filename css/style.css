@@ -1,82 +1,84 @@
-/* Лого и Текст */
+:root {
+    --gold: #d4af37;
+    --text-muted: rgba(255, 255, 255, 0.4);
+}
+
+body {
+    margin: 0;
+    background: #0a0a0a;
+    color: white;
+    font-family: 'Montserrat', sans-serif;
+}
+
+/* Лого дизайн */
 .emy-big {
-    font-size: 1.8em; /* Увеличава само EMY */
-    font-weight: bold;
-    margin-right: 5px;
-    color: rgba(212, 175, 55, 0.9); /* Златисто с лека прозрачност */
+    font-family: 'Playfair Display', serif;
+    font-size: 2.5rem;
+    color: var(--gold);
+    margin-right: 10px;
 }
 
 .brand {
-    font-size: 20px;
-    color: rgba(255, 255, 255, 0.7); /* Приглушено бяло */
+    font-size: 1.1rem;
+    color: var(--text-muted);
     display: flex;
     align-items: baseline;
 }
 
-/* Скрито меню (Sidebar) */
+.topbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 40px;
+    background: rgba(0,0,0,0.9);
+}
+
+/* Скрито меню */
 .side-menu {
     position: fixed;
-    left: -280px; /* Скрито извън екрана */
+    left: -260px;
     top: 0;
     height: 100%;
     width: 250px;
-    background: rgba(20, 0, 30, 0.95);
-    backdrop-filter: blur(10px);
-    display: flex;
-    flex-direction: column;
-    padding: 100px 20px;
-    gap: 15px;
-    transition: 0.4s ease;
-    z-index: 999;
-    border-right: 1px solid rgba(212, 175, 55, 0.2);
+    background: #111;
+    padding-top: 80px;
+    transition: 0.4s;
+    z-index: 1000;
 }
 
 .side-menu.active {
-    left: 0; /* Показва се при клик */
+    left: 0;
 }
 
 .menu-toggle {
     background: none;
     border: none;
-    color: #d4af37;
-    font-size: 30px;
+    color: var(--gold);
+    font-size: 2rem;
     cursor: pointer;
-    margin-right: 15px;
 }
 
-/* Голям и актуален Календар */
+/* Голям Календар */
 .calendar-section {
-    width: 100%;
-    max-width: 1000px; /* Увеличен размер */
-    margin: 0 auto;
-}
-
-.weekdays-grid {
-    display: grid;
-    grid-template-columns: repeat(7, 1fr);
-    width: 100%;
     max-width: 900px;
-    text-align: center;
-    margin-bottom: 10px;
-    color: rgba(255, 255, 255, 0.4); /* Прозрачни букви */
-    font-weight: bold;
+    margin: 50px auto;
 }
 
 .calendar {
+    display: grid;
     grid-template-columns: repeat(7, 1fr);
-    gap: 15px;
-    max-width: 900px;
-    padding: 40px;
-    background: rgba(255, 255, 255, 0.03); /* Почти прозрачен фон */
+    gap: 10px;
 }
 
 .day {
-    aspect-ratio: 1.2; /* По-широки кутийки */
-    font-size: 22px;
-    color: rgba(255, 255, 255, 0.6); /* Приглушени цифри */
+    aspect-ratio: 1.2;
     background: rgba(255, 255, 255, 0.05);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: rgba(255, 255, 255, 0.6); /* Прозрачни цифри */
 }
 
 .day.weekend {
-    color: rgba(255, 255, 255, 0.15); /* Много бледи уикенди */
+    color: rgba(255, 255, 255, 0.15); /* Приглушени уикенди */
 }
