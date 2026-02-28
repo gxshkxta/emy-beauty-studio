@@ -1,50 +1,32 @@
-<!DOCTYPE html>
-<html lang="bg">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>EMYbeauty Studio</title>
-    <link rel="stylesheet" href="css/style.css">
-</head>
-<body>
-
 <div class="topbar">
-  <div class="brand">EMYbeauty Studio</div>
+  <div class="brand-container">
+    <button class="menu-toggle" id="menuToggle">☰</button>
+    <div class="brand"><span class="emy-big">EMY</span>beauty studio</div>
+  </div>
   <div class="top-links">
     <button class="nav-btn-top">Контакти</button>
     <button class="nav-btn-top">Чат</button>
-    <button class="nav-btn-top">Отзиви</button>
     <button class="nav-btn-top">Instagram</button>
-    <button class="nav-btn-top">Facebook</button>
   </div>
 </div>
 
-<div class="container">
-  <div class="side-menu">
-    <button class="menu-tab">Маникюр</button>
-    <button class="menu-tab">Прически</button>
-    <button class="menu-tab">Масажи</button>
-    <button class="menu-tab">СПА</button>
-  </div>
+<div class="side-menu" id="sideMenu">
+  <button class="menu-tab">Маникюр</button>
+  <button class="menu-tab">Прически</button>
+  <button class="menu-tab">Масажи</button>
+  <button class="menu-tab">СПА</button>
+</div>
 
+<div class="container">
   <div class="calendar-section">
     <div class="calendar-nav">
       <button id="prevMonth" class="round-btn">‹</button>
       <h2 id="monthDisplay"></h2>
       <button id="nextMonth" class="round-btn">›</button>
     </div>
+    <div class="weekdays-grid">
+      <div>Пн</div><div>Вт</div><div>Ср</div><div>Чт</div><div>Пт</div><div class="weekend-label">Сб</div><div class="weekend-label">Нд</div>
+    </div>
     <div class="calendar" id="calendar"></div>
   </div>
 </div>
-
-<section class="gallery-container">
-    <h2 class="gallery-title">Нашата атмосфера</h2>
-    <div class="slider-wrapper">
-        <div class="gallery-slider" id="gallerySlider"></div>
-    </div>
-</section>
-
-<script src="js/script.js"></script>
-<script src="js/main.js"></script>
-</body>
-</html>

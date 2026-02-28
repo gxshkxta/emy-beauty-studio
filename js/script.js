@@ -1,33 +1,51 @@
 document.addEventListener("DOMContentLoaded", () => {
+    // 1. Логика за менюто
+    const menuToggle = document.getElementById("menuToggle");
+    const sideMenu = document.getElementById("sideMenu");
+
+    menuToggle.onclick = () => {
+        sideMenu.classList.toggle("active");
+    };
+
+    // Затваряне при клик извън него
+    document.addEventListener("click", (e) => {
+        if (!sideMenu.contains(e.target) && !menuToggle.contains(e.target)) {
+            sideMenu.classList.remove("active");
+        }
+    });
+
+    // 2. Логика за календара (Актуализирана)
     const calendar = document.getElementById("calendar");
     const monthDisplay = document.getElementById("monthDisplay");
-    const prevBtn = document.getElementById("prevMonth");
-    const nextBtn = document.getElementById("nextMonth");
-
     let currentDate = new Date();
-
-    const monthNames = ["Януари", "Февруари", "Март", "Април", "Май", "Юни", "Юли", "Август", "Септември", "Октомври", "Ноември", "Декември"];
 
     function renderCalendar() {
         calendar.innerHTML = "";
         const year = currentDate.getFullYear();
         const month = currentDate.getMonth();
-        monthDisplay.innerText = `${monthNames[month]} ${year}`;
+        monthDisplay.innerText = new Intl.DateTimeFormat('bg-BG', { month: 'long', year: 'numeric' }).format(currentDate);
 
-        const firstDay = new Date(year, month, 1).getDay();
+        // Намиране на първия ден (0 е неделя, затова го превръщаме в 0=понеделник)
+        let firstDayIndex = new Date(year, month, 1).getDay();
+        let shift = firstDayIndex === 0 ? 6 : firstDayIndex - 1;
+
         const daysInMonth = new Date(year, month + 1, 0).getDate();
-        let startingDay = firstDay === 0 ? 6 : firstDay - 1;
 
-        for (let i = 0; i < startingDay; i++) {
-            calendar.appendChild(document.createElement("div"));
+        // Празни полета за подравняване
+        for (let x = 0; x < shift; x++) {
+            const emptyDiv = document.createElement("div");
+            calendar.appendChild(emptyDiv);
         }
 
         for (let i = 1; i <= daysInMonth; i++) {
             const day = document.createElement("div");
             day.className = "day";
             day.innerText = i;
-            const dateToCheck = new Date(year, month, i);
-            if (dateToCheck.getDay() === 6 || dateToCheck.getDay() === 0) day.classList.add("weekend");
+            
+            const dateObj = new Date(year, month, i);
+            if (dateObj.getDay() === 0 || dateObj.getDay() === 6) {
+                day.classList.add("weekend");
+            }
 
             day.onclick = () => {
                 if (!day.classList.contains("weekend")) {
@@ -39,7 +57,8 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     }
 
-    prevBtn.onclick = () => { currentDate.setMonth(currentDate.getMonth() - 1); renderCalendar(); };
-    nextBtn.onclick = () => { currentDate.setMonth(currentDate.getMonth() + 1); renderCalendar(); };
+    document.getElementById("prevMonth").onclick = () => { currentDate.setMonth(currentDate.getMonth() - 1); renderCalendar(); };
+    document.getElementById("nextMonth").onclick = () => { currentDate.setMonth(currentDate.getMonth() + 1); renderCalendar(); };
+
     renderCalendar();
 });
