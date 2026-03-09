@@ -1,90 +1,123 @@
-/* Основен стил с твоите градиенти */
+* { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Poppins', sans-serif; }
+
 body {
-    margin: 0;
-    padding: 0;
-    background: linear-gradient(135deg, #1a0028, #4b0036, #1a0028);
-    background-attachment: fixed;
-    color: white;
-    font-family: 'Segoe UI', sans-serif;
+    background: radial-gradient(circle at 30% 30%, #ff007f, #8a2be2, #ff1493);
+    background-size: 400% 400%;
+    animation: bgBreath 12s ease-in-out infinite;
+    color: #fff;
     overflow-x: hidden;
 }
 
-/* Огромен Календар */
-#calendar-container {
-    min-height: 90vh; /* Почти цял екран */
+@keyframes bgBreath { 0% { background-position: 0% 50%; } 50% { background-position: 100% 50%; } 100% { background-position: 0% 50%; } }
+
+.glass { background: rgba(255, 255, 255, 0.1); backdrop-filter: blur(15px); border: 1px solid rgba(255, 255, 255, 0.2); border-radius: 20px; }
+
+/* ФИНА ГОРНА ЛЕНТА */
+.topbar {
+    position: fixed; top: 0; width: 100%; height: 60px; /* Намалена височина */
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 0 30px; z-index: 1000;
+}
+
+.brand { display: flex; align-items: center; gap: 15px; }
+.brand-name { font-size: 18px; font-weight: 400; }
+.brand-name b { font-weight: 800; text-transform: uppercase; }
+
+.menu-icon { width: 35px; height: 35px; border-radius: 50%; display: flex; flex-direction: column; justify-content: center; align-items: center; gap: 4px; cursor: pointer; }
+.menu-icon span { width: 18px; height: 2px; background: #fff; }
+
+.right-icons { display: flex; flex-direction: row-reverse; gap: 10px; }
+.icon-circle { width: 30px; height: 30px; border-radius: 50%; cursor: pointer; transition: 0.3s; }
+.icon-circle:hover { background: rgba(255,255,255,0.3); }
+
+/* СТРАНИЧНИ ТАБОВЕ С ПОДМЕНЮТА */
+.side-tabs {
+    position: fixed; top: 120px; left: 30px;
+    display: flex; flex-direction: column; gap: 15px;
+    z-index: 900;
+}
+
+.tab { padding: 12px 25px; cursor: pointer; font-weight: 600; width: 180px; text-align: center; }
+.sub-menu { 
+    max-height: 0; overflow: hidden; transition: 0.4s ease-out; 
+    display: flex; flex-direction: column; gap: 5px; padding-left: 10px; 
+}
+.sub-menu.open { max-height: 200px; margin-top: 5px; }
+.sub-item { padding: 8px 15px; font-size: 13px; cursor: pointer; text-align: center; }
+
+/* КАЛЕНДАР - ЦЯЛА ВИСОЧИНА */
+.main-container {
+    margin-top: 80px;
+    margin-left: 240px; /* Подравнен до края на табовете */
+    height: calc(100vh - 120px);
+    padding-right: 40px;
+}
+
+.calendar-wrapper {
+    height: 100%;
     display: flex;
     flex-direction: column;
-    justify-content: center;
-    align-items: center;
     padding: 20px;
 }
 
-/* Плаващо Меню (Sidebar) */
-#sidebar {
-    position: fixed;
-    left: -250px; /* Скрито вляво */
-    top: 50%;
-    transform: translateY(-50%);
-    width: 250px;
-    transition: 0.5s;
-    z-index: 1000;
+.calendar-header-top { display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; }
+
+.month-tab { flex-grow: 1; margin: 0 15px; padding: 10px; text-align: center; font-weight: 700; text-transform: uppercase; letter-spacing: 2px; }
+
+.nav-btn-round { width: 45px; height: 45px; border-radius: 50%; border: none; color: white; cursor: pointer; font-size: 18px; display: flex; align-items: center; justify-content: center; }
+
+.calendar-grid { display: grid; grid-template-columns: repeat(7, 1fr); gap: 10px; flex-grow: 1; }
+.day { display: flex; align-items: center; justify-content: center; border-radius: 15px; cursor: pointer; transition: 0.3s; font-size: 1.1rem; }
+.day:hover { background: rgba(255,255,255,0.2); transform: scale(1.05); }
+.weekend { color: #ff85c0; background: rgba(255,0,127,0.05); }
+
+/* ГАЛЕРИЯ */
+.gallery-section { margin-top: 100px; padding-bottom: 100px; }
+.section-title { text-align: center; margin-bottom: 50px; font-size: 24px; text-transform: uppercase; letter-spacing: 5px; }
+.gallery-container { position: relative; width: 90%; margin: 0 auto; }
+.gallery-nav-round { position: absolute; top: 50%; transform: translateY(-50%); width: 50px; height: 50px; border-radius: 50%; border: none; color: white; cursor: pointer; z-index: 10; font-size: 20px; display: flex; align-items: center; justify-content: center; }
+.prev { left: -25px; }
+.next { right: -25px; }
+.gallery-wrap { width: 100%; overflow: hidden; border-radius: 30px; }
+.gallery-track { display: flex; }
+.gallery-track img { width: 20%; height: 400px; object-fit: cover; padding: 10px; border-radius: 35px; }
+
+/* ЧАТ И МОДАЛ */
+.chat-bubble { position: fixed; bottom: 30px; right: 30px; width: 60px; height: 60px; border-radius: 50%; display: flex; align-items: center; justify-content: center; cursor: pointer; z-index: 1000; }
+.modal { position: fixed; inset: 0; background: rgba(0,0,0,0.8); display: none; align-items: center; justify-content: center; z-index: 2000; }
+.modal-content { width: 350px; padding: 30px; text-align: center; }
+.modal input { width: 100%; padding: 12px; margin: 10px 0; border-radius: 10px; border: none; }
+.confirm-btn { width: 100%; padding: 12px; background: #ff007f; color: white; border: none; border-radius: 10px; cursor: pointer; font-weight: bold; }
+/* УВЕРЕТЕ СЕ, ЧЕ БУТОНЪТ Е КЛИКАЕМ */
+.menu-icon {
+    width: 35px; 
+    height: 35px; 
+    border-radius: 50%; 
+    display: flex; 
+    flex-direction: column; 
+    justify-content: center; 
+    align-items: center; 
+    gap: 4px; 
+    cursor: pointer; /* Прави го да изглежда като бутон */
+    position: relative;
+    z-index: 1100; /* Над всичко останало */
 }
 
-#sidebar.active {
-    left: 20px; /* Излиза напред */
+/* СТРАНИЧНО МЕНЮ - НАЧАЛНО СЪСТОЯНИЕ */
+.side-tabs {
+    position: fixed; 
+    top: 120px; 
+    left: -300px; /* Напълно скрито вляво */
+    display: flex; 
+    flex-direction: column; 
+    gap: 15px;
+    z-index: 900;
+    transition: all 0.5s ease-in-out; /* Плавна анимация */
+    opacity: 0;
 }
 
-.menu-tab {
-    background: rgba(255, 255, 255, 0.1); /* Прозрачен плаващ фон */
-    backdrop-filter: blur(10px);
-    margin-bottom: 10px;
-    padding: 20px;
-    border-radius: 15px;
-    border: 1px solid rgba(255, 255, 255, 0.2);
-    cursor: pointer;
-    text-align: center;
-}
-
-/* Безкрайна Галерия */
-.gallery-wrapper {
-    overflow: hidden;
-    width: 100%;
-    background: rgba(0,0,0,0.3);
-    padding: 50px 0;
-}
-
-.gallery-track {
-    display: flex;
-    width: calc(250px * 38); /* 19 снимки х 2 за безкрайност */
-    animation: scroll 40s linear infinite;
-}
-
-.gallery-item {
-    width: 200px;
-    height: 250px;
-    margin: 0 25px;
-    background-size: cover;
-    background-position: center;
-    border-radius: 15px;
-    flex-shrink: 0;
-    box-shadow: 0 5px 15px rgba(0,0,0,0.5); /* Малко сянка за обем */
-    border: 1px solid rgba(255,255,255,0.1);
-}
-@keyframes scroll {
-    0% { transform: translateX(0); }
-    100% { transform: translateX(calc(-250px * 19)); }
-}
-
-/* Бутон за менюто */
-.menu-btn {
-    position: fixed;
-    left: 20px;
-    top: 20px;
-    z-index: 1001;
-    background: #4b0036;
-    border: none;
-    color: white;
-    padding: 10px 15px;
-    border-radius: 5px;
-    cursor: pointer;
+/* КОГАТО МЕНЮТО Е ОТВОРЕНО */
+.side-tabs.active {
+    left: 30px; 
+    opacity: 1;
 }

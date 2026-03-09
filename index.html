@@ -3,31 +3,83 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>EMYbeauty Studio</title>
+    <title>EMYbeauty studio</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
 
-    <button class="menu-btn" onclick="toggleMenu()">☰ Меню</button>
+    <header class="topbar glass">
+        <div class="brand">
+            <div class="menu-icon glass" onclick="toggleMenu()">
+                <span></span><span></span><span></span>
+            </div>
+            <div class="brand-name"><b>EMY</b> beauty studio</div>
+        </div>
+        
+        <div class="right-icons">
+            <div class="icon-circle glass" title="Social 5"></div>
+            <div class="icon-circle glass" title="Social 4"></div>
+            <div class="icon-circle glass" title="Social 3"></div>
+            <div class="icon-circle glass" title="Social 2"></div>
+            <div class="icon-circle glass" title="Social 1"></div>
+        </div>
+    </header>
 
-    <div id="sidebar">
-        <div class="menu-tab">📅 Процедури</div>
-        <div class="menu-tab">✨ Услуги</div>
+    <nav class="side-tabs" id="sideTabs">
+        <div class="menu-item">
+            <div class="tab glass" onclick="toggleSub('sub1')">ПРОЦЕДУРИ</div>
+            <div class="sub-menu" id="sub1">
+                <div class="sub-item glass">Маникюр</div>
+                <div class="sub-item glass">Педикюр</div>
+            </div>
+        </div>
+        <div class="menu-item">
+            <div class="tab glass" onclick="toggleSub('sub2')">ПАЗАР</div>
+            <div class="sub-menu" id="sub2">
+                <div class="sub-item glass">Козметика</div>
+                <div class="sub-item glass">Аксесоари</div>
+            </div>
+        </div>
+    </nav>
+
+    <main class="main-container">
+        <div class="calendar-wrapper glass">
+            <div class="calendar-header-top">
+                <button class="nav-btn-round glass" onclick="changeMonth(-1)">&#10094;</button>
+                <div class="month-tab glass" id="monthDisplay"></div>
+                <button class="nav-btn-round glass" onclick="changeMonth(1)">&#10095;</button>
+            </div>
+            <div class="calendar-grid" id="calendarGrid"></div>
+        </div>
+    </main>
+
+    <div class="chat-bubble glass" onclick="window.open('https://chat.google.com/', '_blank')">
+        <svg width="30" height="30" viewBox="0 0 24 24" fill="white"><path d="M20 2H4c-1.1 0-2 .9-2 2v18l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2z"/></svg>
     </div>
 
-    <div id="calendar-container">
-        <h1 style="text-align: center;">EMYbeauty Studio</h1>
-        <div id="calendar-root">
+    <section class="gallery-section">
+        <h2 class="section-title">Избери си</h2>
+        <div class="gallery-container">
+            <button class="gallery-nav-round glass prev" onclick="moveManual(-1)">&#10094;</button>
+            <div class="gallery-wrap" id="galleryWrap">
+                <div class="gallery-track" id="galleryTrack"></div>
             </div>
-    </div>
+            <button class="gallery-nav-round glass next" onclick="moveManual(1)">&#10095;</button>
+        </div>
+    </section>
 
-    <div class="gallery-wrapper">
-        <h2 style="text-align: center; margin-bottom: 30px;">Галерия</h2>
-        <div class="gallery-track" id="gallery-track">
-            </div>
+    <div class="modal" id="bookingModal">
+        <div class="modal-content glass">
+            <h3>Запази час</h3>
+            <p id="selectedDateText"></p>
+            <input type="text" placeholder="Твоето име">
+            <input type="tel" placeholder="Телефон">
+            <button class="confirm-btn" onclick="sendBooking()">ПОТВЪРДИ</button>
+            <button class="cancel-btn" onclick="closeModal()">ОТКАЗ</button>
+        </div>
     </div>
 
     <script src="js/script.js"></script>
-
 </body>
 </html>
