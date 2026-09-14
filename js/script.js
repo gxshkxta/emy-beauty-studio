@@ -143,3 +143,35 @@ function toggleSub(id) {
     
     sub.classList.toggle('open');
 }
+
+// Cookie Banner Logic
+function acceptCookies() {
+    localStorage.setItem('emyCookiesAccepted', 'true');
+    document.getElementById('cookieBanner').style.display = 'none';
+}
+
+document.addEventListener("DOMContentLoaded", function() {
+    if (!localStorage.getItem('emyCookiesAccepted')) {
+        const banner = document.getElementById('cookieBanner');
+        if (banner) banner.style.display = 'flex';
+    }
+});
+
+// Contact Modal Logic
+function openContactModal() {
+    const modal = document.getElementById('contactModal');
+    if (modal) modal.style.display = 'flex';
+}
+
+function closeContactModal() {
+    const modal = document.getElementById('contactModal');
+    if (modal) modal.style.display = 'none';
+}function openMyEmyModal() {
+    const modal = document.getElementById('myEmyModal');
+    if (modal) modal.style.display = 'flex';
+}
+
+function closeMyEmyModal() {
+    const modal = document.getElementById('myEmyModal');
+    if (modal) modal.style.display = 'none';
+}

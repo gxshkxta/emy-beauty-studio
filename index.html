@@ -14,35 +14,65 @@
             <div class="menu-icon glass" onclick="toggleMenu()">
                 <span></span><span></span><span></span>
             </div>
-            <div class="brand-name"><b>EMY</b> beauty studio</div>
+            <a href="#" onclick="window.scrollTo({top: 0, behavior: 'smooth'}); return false;" class="logo" style="text-decoration: none;">
+                <span class="logo-text">EMY</span>
+                <span class="logo-sub">beauty studio experience</span>
+            </a>
         </div>
         
         <div class="right-icons">
-            <div class="icon-circle glass" title="Social 5"></div>
-            <div class="icon-circle glass" title="Social 4"></div>
-            <div class="icon-circle glass" title="Social 3"></div>
-            <div class="icon-circle glass" title="Social 2"></div>
-            <div class="icon-circle glass" title="Social 1"></div>
+            <button class="cart-btn glass" onclick="openCart()" title="Моята количка">
+                <span class="cart-icon">🛍️</span>
+                <span class="cart-counter">0</span>
+            </button>
+            <button class="contact-header-btn glass" onclick="openContactModal()" title="Контакти и Вход">
+                <span class="icon">📞</span>
+                <span>КОНТАКТИ</span>
+            </button>
+            <button class="cart-btn glass" onclick="openMyEmyModal()" title="Моят EMY">
+    <span>👤</span>
+    <span>МОЯТ EMY</span>
+</button>
         </div>
     </header>
 
-    <nav class="side-tabs" id="sideTabs">
-        <div class="menu-item">
-            <div class="tab glass" onclick="toggleSub('sub1')">ПРОЦЕДУРИ</div>
-            <div class="sub-menu" id="sub1">
-                <div class="sub-item glass">Маникюр</div>
-                <div class="sub-item glass">Педикюр</div>
-            </div>
+    <!-- ЛЯВО МЕНЮ: ТРИТЕ ОСНОВНИ ВЕРТИКАЛИ -->
+    <nav id="sideTabs" class="side-tabs floating">
+        <!-- 1. STUDIO / ПРОЦЕДУРИ -->
+        <button class="tab-btn" onclick="toggleSub('studioSub')">
+            <span class="btn-main">STUDIO</span>
+            <span class="btn-sub">beauty services</span>
+        </button>
+        <div id="studioSub" class="sub-menu">
+            <p onclick="selectService('Маникюр')">Маникюр</p>
+            <p onclick="selectService('Педикюр')">Педикюр</p>
+            <p onclick="selectService('Комбинирани')">Комбинирани</p>
         </div>
-        <div class="menu-item">
-            <div class="tab glass" onclick="toggleSub('sub2')">ПАЗАР</div>
-            <div class="sub-menu" id="sub2">
-                <div class="sub-item glass">Козметика</div>
-                <div class="sub-item glass">Аксесоари</div>
-            </div>
-        </div>
-    </nav>
 
+        <!-- 2. EMY CARE -->
+        <button class="tab-btn" onclick="toggleSub('careSub')">
+            <span class="btn-main">EMY CARE</span>
+            <span class="btn-sub">beauty products</span>
+        </button>
+        <div id="careSub" class="sub-menu">
+            <p onclick="selectCategory('collection')">COLLECTION</p>
+            <p onclick="selectCategory('rituals')">RITUALS</p>
+            <p onclick="selectCategory('sets')">КОМПЛЕКТИ</p>
+            <p onclick="selectCategory('accessories')">АКСЕСОАРИ</p>
+        </div>
+
+        <!-- 3. EMY ACADEMY -->
+        <button class="tab-btn" onclick="toggleSub('academySub')">
+            <span class="btn-main">EMY ACADEMY</span>
+            <span class="btn-sub">professional education</span>
+        </button>
+        <div id="academySub" class="sub-menu">
+            <p onclick="selectCourse('basic')">Базов курс</p>
+            <p onclick="selectCourse('advanced')">Надграждащ курс</p>
+            <p onclick="selectCourse('masterclass')">Мастърклас</p>
+            <p class="highlight-action" onclick="selectCourse('apply')">ЗАПИШИ СЕ</p>
+        </div>
+</nav>
     <main class="main-container">
         <div class="calendar-wrapper glass">
             <div class="calendar-header-top">
@@ -58,16 +88,132 @@
         <svg width="30" height="30" viewBox="0 0 24 24" fill="white"><path d="M20 2H4c-1.1 0-2 .9-2 2v18l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2z"/></svg>
     </div>
 
-    <section class="gallery-section">
-        <h2 class="section-title">Избери си</h2>
-        <div class="gallery-container">
-            <button class="gallery-nav-round glass prev" onclick="moveManual(-1)">&#10094;</button>
-            <div class="gallery-wrap" id="galleryWrap">
-                <div class="gallery-track" id="galleryTrack"></div>
-            </div>
-            <button class="gallery-nav-round glass next" onclick="moveManual(1)">&#10095;</button>
+    <!-- ЕТАП 9: EMY ПРЕПОРЪЧВА -->
+    <section class="section-block glass">
+        <div class="section-title">
+            <h2>EMY <span>ПРЕПОРЪЧВА</span></h2>
+        </div>
+        <div class="recommendation-card">
+            <div class="rec-badge">Специална комбинация</div>
+            <h3>Маникюр + EMY Care Hand Ritual</h3>
+            <p>Цялостна грижа за вашите ръце: дълбока хидратация, оформяне и дълготраен цвят.</p>
+            <button class="action-btn glass" onclick="scrollToCalendar()">ЗАПАЗИ ТАЗИ КОМБИНАЦИЯ</button>
         </div>
     </section>
+
+    <!-- ЕТАП 10: EMY NOW / АКТУАЛНО -->
+    <section class="section-block glass">
+        <div class="section-title">
+            <h2>EMY <span>NOW</span></h2>
+        </div>
+        <div class="promo-grid">
+            <div class="promo-card glass">
+                <span class="promo-tag">Сезонно предложение</span>
+                <h4>Пролетна свежест</h4>
+                <p>Вземете -15% отстъпка при резервация на комбинирани процедури този месец.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- ЕТАП 11: EMY GALLERY СЪС СТРЕЛКИ И РЕАЛНИ СНИМКИ -->
+    <section class="gallery-section">
+        <div class="section-title">
+            <h2>EMY <span>GALLERY</span></h2>
+        </div>
+
+        <div class="gallery-wrapper">
+            <!-- Бутон ЛЯВО -->
+            <button class="gallery-arrow left-arrow glass" onclick="scrollGalleryLeft()">&#8249;</button>
+
+            <div class="gallery-slider" id="gallerySlider">
+                <div class="gallery-track">
+                    <!-- Първа група снимки (твоите реални файлове) -->
+                    <img src="assets/images/photo1.jpg" alt="EMY Gallery 1">
+                    <img src="assets/images/photo2.jpg" alt="EMY Gallery 2">
+                    <img src="assets/images/photo3.jpg" alt="EMY Gallery 3">
+                    <img src="assets/images/photo4.jpg" alt="EMY Gallery 4">
+                    <img src="assets/images/photo5.jpg" alt="EMY Gallery 5">
+                    <img src="assets/images/photo6.jpg" alt="EMY Gallery 6">
+
+                    <!-- Дублираме същите снимки за безкраен плуващ Loop -->
+                    <img src="assets/images/photo1.jpg" alt="EMY Gallery 1">
+                    <img src="assets/images/photo2.jpg" alt="EMY Gallery 2">
+                    <img src="assets/images/photo3.jpg" alt="EMY Gallery 3">
+                    <img src="assets/images/photo4.jpg" alt="EMY Gallery 4">
+                    <img src="assets/images/photo5.jpg" alt="EMY Gallery 5">
+                    <img src="assets/images/photo6.jpg" alt="EMY Gallery 6">
+                </div>
+            </div>
+
+            <!-- Бутон ДЯСНО -->
+            <button class="gallery-arrow right-arrow glass" onclick="scrollGalleryRight()">&#8250;</button>
+        </div>
+    </section>
+
+    <!-- ФУТЪР СЕКЦИЯ (KINETRIX GROUP) -->
+    <footer class="footer-section glass">
+        <!-- 1. ГОРЕН ИНФОРМАЦИОНЕН БАР -->
+        <div class="footer-trust-bar">
+            <div class="trust-item">
+                <span class="trust-icon">🚚</span>
+                <span>Доставка в цяла България</span>
+            </div>
+            <div class="trust-item">
+                <span class="trust-icon">💳</span>
+                <span>Сигурно плащане / Наложен платеж</span>
+            </div>
+            <div class="trust-item">
+                <span class="trust-icon">🔄</span>
+                <span>14 дни право на връщане</span>
+            </div>
+        </div>
+
+        <!-- 2. ОСНОВЕН БЛОК С 4 КОЛОНИ -->
+        <div class="footer-content">
+            <!-- Колона 1: Лого и Бранд -->
+            <div class="footer-col brand-col">
+                <div class="brand-name">
+                    <b>EMY</b>
+                    <span class="brand-sub">beauty studio experience</span>
+                </div>
+                <p class="footer-desc">Премиум грижа, продуктова линия и професионално обучение.</p>
+            </div>
+
+            <!-- Колона 2: Работно време -->
+            <div class="footer-col">
+                <h4>РАБОТНО ВРЕМЕ</h4>
+                <p><strong>Понеделник - Петък:</strong><br>09:00 - 19:00</p>
+                <p><strong>Събота - Неделя:</strong><br>10:00 - 18:00</p>
+            </div>
+
+            <!-- Колона 3: Контакти -->
+            <div class="footer-col">
+                <h4>КОНТАКТИ</h4>
+                <p>гр. София</p>
+                <p>+359 87 780 9442</p>
+                <p>antonov.gwork@gmail.com</p>
+            </div>
+
+            <!-- Колона 4: Бюлетин -->
+            <div class="footer-col newsletter-col">
+                <h4>НЕ ПРОПУСКАЙТЕ НИЩО НОВО!</h4>
+                <p>Абонирайте се за нашия бюлетин за промоции и нови курсове.</p>
+                <form class="newsletter-form" onsubmit="event.preventDefault();">
+                    <input type="email" placeholder="Вашият имейл..." class="glass-input" required>
+                    <button type="submit" class="newsletter-btn glass">АБОНИРАЙ СЕ</button>
+                </form>
+            </div>
+        </div>
+
+        <!-- 3. НАЙ-ДОЛЕН ПОД-ФУТЪР -->
+        <div class="footer-bottom">
+            <div style="display: flex; justify-content: center; gap: 20px; padding-bottom: 15px; font-size: 0.8rem;">
+                <a href="terms.html" style="color: #ff007f; text-decoration: none; transition: 0.3s;" onmouseover="this.style.textShadow='0 0 8px rgba(255,0,127,0.6)'" onmouseout="this.style.textShadow='none'">Общи условия</a>
+                <a href="privacy.html" style="color: #ff007f; text-decoration: none; transition: 0.3s;" onmouseover="this.style.textShadow='0 0 8px rgba(255,0,127,0.6)'" onmouseout="this.style.textShadow='none'">Политика за поверителност</a>
+            </div>
+            <p>Created by <strong>Kinetrix Group</strong></p>
+        </div>
+    </footer>
 
     <div class="modal" id="bookingModal">
         <div class="modal-content glass">
@@ -81,5 +227,47 @@
     </div>
 
     <script src="js/script.js"></script>
+
+    <!-- ЕТАП 12: БЪДЕЩА КЛИЕНТСКА ЗОНА "МОЯТ EMY" -->
+    <div id="myEmyModal" class="modal-overlay">
+        <div class="modal-content glass">
+            <button class="close-modal" onclick="closeMyEmyModal()">&times;</button>
+            <div class="modal-header">
+                <h3>МОЯТ <span>EMY</span></h3>
+                <p>Вашият персонален профил</p>
+            </div>
+            
+            <div class="emy-user-grid">
+                <div class="user-tab-btn active">👤 Профил</div>
+                <div class="user-tab-btn">📅 Моите часове</div>
+                <div class="user-tab-btn">🛍️ Моите поръчки</div>
+                <div class="user-tab-btn">❤️ Любими</div>
+            </div>
+
+            <div class="user-tab-content">
+                <p class="coming-soon-text">Зоната "МОЯТ EMY" се подготвя. В момента работим по вашата клиентска система!</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- COOKIE BANNER -->
+    <div id="cookieBanner" class="cookie-banner glass" style="display: none;">
+        <p>Този сайт използва бисквитки за най-добро потребителско изживяване. <a href="privacy.html" style="color: #ff007f;">Виж политиката</a>.</p>
+        <button class="cookie-btn glass" onclick="acceptCookies()">Разбрах и приемам</button>
+    </div>
+
+    <!-- CONTACT MODAL -->
+    <div id="contactModal" class="modal glass-modal" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: 10000; align-items: center; justify-content: center; background: rgba(0,0,0,0.5);">
+        <div class="modal-content glass" style="padding: 40px; border-radius: 20px; width: 90%; max-width: 400px; text-align: center;">
+            <span class="close-btn" onclick="closeContactModal()" style="float: right; cursor: pointer; font-size: 1.5rem; margin-top: -20px;">&times;</span>
+            <h2 style="color: #ff007f; margin-bottom: 25px;">Свържете се с нас</h2>
+            <div class="social-links" style="display: flex; flex-direction: column; gap: 15px;">
+                <a href="tel:+359888888888" class="glass" style="padding: 12px; color: white; text-decoration: none; border-radius: 10px; transition: background 0.3s;">📱 Телефон за връзка</a>
+                <a href="#" class="glass" style="padding: 12px; color: white; text-decoration: none; border-radius: 10px; transition: background 0.3s;">💬 Viber / WhatsApp</a>
+                <a href="#" class="glass" style="padding: 12px; color: white; text-decoration: none; border-radius: 10px; transition: background 0.3s;">📘 Facebook Page</a>
+                <a href="#" class="glass" style="padding: 12px; color: white; text-decoration: none; border-radius: 10px; transition: background 0.3s;">📸 Instagram</a>
+            </div>
+        </div>
+    </div>
 </body>
 </html>
