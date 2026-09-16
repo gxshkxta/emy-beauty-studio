@@ -1,0 +1,828 @@
+* { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Poppins', sans-serif; }
+
+body {
+    position: relative;
+    isolation: isolate;
+    background: radial-gradient(circle at 30% 30%, #ff007f, #8a2be2, #ff1493);
+    background-size: 400% 400%;
+    animation: bgBreath 12s ease-in-out infinite;
+    color: #fff;
+    overflow-x: hidden;
+}
+
+body::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    z-index: 0;
+    pointer-events: none;
+    background: rgba(255, 255, 255, 0.025);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+}
+
+.bg-glow {
+    position: fixed;
+    width: 520px;
+    height: 520px;
+    border-radius: 50%;
+    pointer-events: none;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    user-select: none;
+    z-index: -1;
+    filter: blur(120px);
+    opacity: 0.34;
+    will-change: transform;
+}
+
+.blob-1 {
+    top: -180px;
+    left: -140px;
+    background: rgba(176, 112, 255, 0.8);
+    animation: floatGlowOne 26s ease-in-out infinite alternate;
+}
+
+.blob-2 {
+    right: -180px;
+    bottom: -160px;
+    background: rgba(255, 0, 127, 0.7);
+    animation: floatGlowTwo 30s ease-in-out infinite alternate;
+}
+
+.blob-3 {
+    top: -200px;
+    right: -160px;
+    width: 420px;
+    height: 420px;
+    background: rgba(138, 43, 226, 0.55);
+    animation: floatGlowThree 23s ease-in-out infinite alternate;
+}
+
+@keyframes floatGlowOne {
+    to { transform: translate(50px, 40px) scale(1.05); }
+}
+
+@keyframes floatGlowTwo {
+    to { transform: translate(-50px, -40px) scale(0.95); }
+}
+
+@keyframes floatGlowThree {
+    to { transform: translate(-35px, 30px) scale(1.04); }
+}
+
+@keyframes bgBreath { 0% { background-position: 0% 50%; } 50% { background-position: 100% 50%; } 100% { background-position: 0% 50%; } }
+
+.glass { background: rgba(255, 255, 255, 0.1); backdrop-filter: blur(15px); border: 1px solid rgba(255, 255, 255, 0.2); border-radius: 20px; }
+
+/* ФИНА ГОРНА ЛЕНТА */
+.topbar {
+    position: fixed; top: 0; width: 100%; height: 60px; /* Намалена височина */
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 0 30px; z-index: 1000;
+}
+
+.brand { display: flex; align-items: center; gap: 15px; }
+
+/* ЛОГО И ПОЗИЦИОНИРАНЕ */
+.brand-name {
+    display: flex;
+    flex-direction: column;
+    line-height: 1.1;
+}
+
+.brand-name b {
+    font-size: 1.4rem;
+    letter-spacing: 2px;
+    color: #ffffff;
+}
+
+.brand-sub {
+    font-size: 0.65rem;
+    font-weight: 300;
+    text-transform: lowercase;
+    letter-spacing: 1.5px;
+    color: rgba(255, 255, 255, 0.75);
+}
+
+.menu-icon { width: 35px; height: 35px; border-radius: 50%; display: flex; flex-direction: column; justify-content: center; align-items: center; gap: 4px; cursor: pointer; }
+.menu-icon span { width: 18px; height: 2px; background: #fff; }
+
+.right-icons { display: flex; flex-direction: row-reverse; gap: 10px; }
+.icon-circle { width: 30px; height: 30px; border-radius: 50%; cursor: pointer; transition: 0.3s; }
+.icon-circle:hover { background: rgba(255,255,255,0.3); }
+
+/* СТРАНИЧНИ ТАБОВЕ С ПОДМЕНЮТА */
+.side-tabs {
+    position: fixed; top: 120px; left: 30px;
+    display: flex; flex-direction: column; gap: 15px;
+    z-index: 900;
+}
+
+.tab { padding: 12px 25px; cursor: pointer; font-weight: 600; width: 180px; text-align: center; }
+
+/* ВЪРНО МЕНЮ И GLASS БУТОНИ */
+.side-tabs .tab-btn {
+    width: 100%;
+    padding: 14px 20px;
+    margin-bottom: 12px;
+    border: none;
+    outline: none;
+    
+    /* Оригиналният Glassmorphic фон */
+    background: rgba(255, 255, 255, 0.12) !important;
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 12px;
+    
+    /* Текст и оформяне */
+    color: #ffffff !important;
+    font-size: 0.85rem;
+    font-weight: 700;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    text-align: center;
+    white-space: nowrap; /* Предотвратява счупване на текста на 2 реда */
+    
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+}
+
+/* Ефект при посочване с мишката */
+.side-tabs .tab-btn:hover {
+    background: rgba(255, 255, 255, 0.25) !important;
+    border-color: rgba(255, 255, 255, 0.4);
+    transform: translateY(-2px);
+}
+
+.sub-menu { 
+    max-height: 0; overflow: hidden; transition: 0.4s ease-out; 
+    display: flex; flex-direction: column; gap: 5px; padding-left: 10px; 
+}
+.sub-menu.open { max-height: 200px; margin-top: 5px; }
+.sub-item { padding: 8px 15px; font-size: 13px; cursor: pointer; text-align: center; }
+
+/* Акцент върху "ЗАПАЗИ ЧАС" в подменюто */
+.sub-menu p.highlight-action {
+    font-weight: bold;
+    color: #ffffff;
+    border-top: 1px solid rgba(255, 255, 255, 0.15);
+    margin-top: 8px;
+    padding-top: 10px;
+    letter-spacing: 1px;
+}
+
+.sub-menu p.highlight-action:hover {
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 8px;
+}
+
+/* КАЛЕНДАР - ЦЯЛА ВИСОЧИНА */
+.main-container {
+    margin-top: 80px;
+    margin-left: 240px; /* Подравнен до края на табовете */
+    height: calc(100vh - 120px);
+    padding-right: 40px;
+}
+
+.calendar-wrapper {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    padding: 20px;
+}
+
+.calendar-header-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+    padding: 6px;
+    background: transparent;
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+    border: none;
+    box-shadow: none;
+    border-radius: 16px;
+}
+
+.month-tab { flex-grow: 1; margin: 0 15px; padding: 10px; text-align: center; font-weight: 700; text-transform: uppercase; letter-spacing: 2px; }
+
+.calendar-header-top .glass {
+    background: rgba(255, 255, 255, 0.035);
+    border-color: rgba(255, 255, 255, 0.08);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+}
+
+.nav-btn-round { width: 45px; height: 45px; border-radius: 50%; border: none; color: white; cursor: pointer; font-size: 18px; display: flex; align-items: center; justify-content: center; }
+
+.calendar-grid { display: grid; grid-template-columns: repeat(7, 1fr); gap: 14px; flex-grow: 1; }
+.day {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 15px;
+    cursor: pointer;
+    transition: transform 0.3s ease, background 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+    font-size: 1.1rem;
+    background: rgba(255, 255, 255, 0.055);
+    backdrop-filter: blur(7px);
+    -webkit-backdrop-filter: blur(7px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    box-shadow: 0 0 10px rgba(255, 255, 255, 0.035);
+}
+.weekend { color: #ff85c0; background: rgba(255, 0, 127, 0.035); }
+.day:hover {
+    background: rgba(255, 255, 255, 0.13);
+    border-color: rgba(255, 255, 255, 0.24);
+    transform: translateY(-2px);
+    box-shadow: 0 5px 18px rgba(255, 255, 255, 0.12);
+}
+.day.active {
+    background: rgba(255, 255, 255, 0.19);
+    border-color: rgba(255, 255, 255, 0.42);
+    box-shadow: 0 0 18px rgba(255, 255, 255, 0.18);
+}
+
+/* ГАЛЕРИЯ */
+.gallery-section { margin-top: 100px; padding-bottom: 100px; }
+.section-title { text-align: center; margin-bottom: 50px; font-size: 24px; text-transform: uppercase; letter-spacing: 5px; }
+.gallery-section .section-title,
+.gallery-section .section-title h2,
+.gallery-section .section-title span {
+    background: transparent;
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+    box-shadow: none;
+    filter: none;
+    text-shadow: none;
+}
+.gallery-section .section-title::before,
+.gallery-section .section-title::after,
+.gallery-section .section-title h2::before,
+.gallery-section .section-title h2::after,
+.gallery-section .section-title span::before,
+.gallery-section .section-title span::after {
+    content: none;
+    display: none;
+}
+.gallery-container { position: relative; width: 90%; margin: 0 auto; }
+.gallery-nav-round { position: absolute; top: 50%; transform: translateY(-50%); width: 50px; height: 50px; border-radius: 50%; border: none; color: white; cursor: pointer; z-index: 10; font-size: 20px; display: flex; align-items: center; justify-content: center; }
+.prev { left: -25px; }
+.next { right: -25px; }
+.gallery-wrap { width: 100%; overflow: hidden; border-radius: 30px; }
+.gallery-track { display: flex; }
+.gallery-track img { width: 20%; height: 400px; object-fit: cover; padding: 10px; border-radius: 35px; }
+
+/* ЧАТ И МОДАЛ */
+.chat-bubble { position: fixed; bottom: 30px; right: 30px; width: 60px; height: 60px; border-radius: 50%; display: flex; align-items: center; justify-content: center; cursor: pointer; z-index: 1000; }
+.modal { position: fixed; inset: 0; background: rgba(0,0,0,0.8); display: none; align-items: center; justify-content: center; z-index: 2000; }
+.modal-content { width: 350px; padding: 30px; text-align: center; }
+.modal input { width: 100%; padding: 12px; margin: 10px 0; border-radius: 10px; border: none; }
+.confirm-btn { width: 100%; padding: 12px; background: #ff007f; color: white; border: none; border-radius: 10px; cursor: pointer; font-weight: bold; }
+/* УВЕРЕТЕ СЕ, ЧЕ БУТОНЪТ Е КЛИКАЕМ */
+.menu-icon {
+    width: 35px; 
+    height: 35px; 
+    border-radius: 50%; 
+    display: flex; 
+    flex-direction: column; 
+    justify-content: center; 
+    align-items: center; 
+    gap: 4px; 
+    cursor: pointer; /* Прави го да изглежда като бутон */
+    position: relative;
+    z-index: 1100; /* Над всичко останало */
+}
+
+/* СТРАНИЧНО МЕНЮ - НАЧАЛНО СЪСТОЯНИЕ */
+.side-tabs {
+    position: fixed; 
+    top: 120px; 
+    left: -300px; /* Напълно скрито вляво */
+    display: flex; 
+    flex-direction: column; 
+    gap: 15px;
+    z-index: 900;
+    transition: all 0.5s ease-in-out; /* Плавна анимация */
+    opacity: 0;
+}
+
+/* КОГАТО МЕНЮТО Е ОТВОРЕНО */
+.side-tabs.active {
+    left: 30px; 
+    opacity: 1;
+}
+
+/* 1. ПЛУВАЩО ЛЯВО МЕНЮ (БЕЗ ФОН И КУТИЯ) */
+.side-tabs {
+    background: transparent !important;
+    backdrop-filter: none !important;
+    -webkit-backdrop-filter: none !important;
+    border: none !important;
+    box-shadow: none !important;
+    padding: 0 !important;
+    width: auto !important;
+}
+
+/* 2. НАМАЛЯВАНЕ НА РАЗСТОЯНИЕТО МЕЖДУ БУТОНИТЕ */
+.side-tabs .tab-btn {
+    margin-bottom: 6px !important;
+}
+
+/* 3. КОМПАКТНО ПОДМЕНЮ */
+.sub-menu {
+    margin-top: -2px !important;
+    margin-bottom: 8px !important;
+    padding-left: 10px !important;
+}
+
+.sub-menu p {
+    padding: 6px 12px !important;
+    margin-bottom: 3px !important;
+}
+
+.side-tabs .tab-btn {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 10px 18px !important;
+}
+
+.btn-main {
+    font-size: 0.85rem;
+    font-weight: 700;
+    letter-spacing: 1.5px;
+}
+
+.btn-sub {
+    font-size: 0.55rem;
+    font-weight: 300;
+    text-transform: lowercase;
+    opacity: 0.7;
+    letter-spacing: 1px;
+    margin-top: 2px;
+}
+
+/* ВЕРТИКАЛНИ СЕКЦИИ ПОД КАЛЕНДАРА */
+.section-block {
+    margin: 40px auto;
+    width: 90%;
+    max-width: 1200px;
+    padding: 30px;
+    border-radius: 20px;
+    color: #ffffff;
+}
+
+.section-title h2 {
+    font-size: 1.6rem;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    margin-bottom: 20px;
+}
+
+.section-title h2 span {
+    font-weight: 300;
+    opacity: 0.8;
+}
+
+/* СТИЛ ЗА "EMY ПРЕПОРЪЧВА" */
+.recommendation-card {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    align-items: flex-start;
+}
+
+.rec-badge {
+    background: rgba(255, 255, 255, 0.2);
+    padding: 4px 12px;
+    border-radius: 20px;
+    font-size: 0.75rem;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+}
+
+.action-btn {
+    margin-top: 10px;
+    padding: 12px 24px;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    border-radius: 10px;
+    color: #ffffff;
+    font-weight: bold;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.action-btn:hover {
+    background: rgba(255, 255, 255, 0.25);
+    transform: translateY(-2px);
+}
+
+/* СТИЛ ЗА "EMY NOW" */
+.promo-card {
+    padding: 20px;
+    border-radius: 15px;
+    border: 1px solid rgba(255, 255, 255, 0.15);
+}
+
+.promo-tag {
+    font-size: 0.7rem;
+    color: rgba(255, 255, 255, 0.7);
+    text-transform: uppercase;
+}
+
+/* ФУТЪР СТИЛОВЕ (GLASSMORPHISM) */
+.footer-section {
+    margin-top: 60px;
+    padding: 0;
+    border-radius: 24px 24px 0 0;
+    color: #ffffff;
+}
+
+/* 1. Trust Bar */
+.footer-trust-bar {
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+    gap: 15px;
+    padding: 20px 30px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.15);
+    background: rgba(255, 255, 255, 0.05);
+}
+
+.trust-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 0.85rem;
+    letter-spacing: 0.5px;
+}
+
+/* 2. Основна решетка */
+.footer-content {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 30px;
+    padding: 40px 30px;
+}
+
+.footer-col h4 {
+    font-size: 0.9rem;
+    letter-spacing: 1.5px;
+    margin-bottom: 15px;
+    text-transform: uppercase;
+}
+
+.footer-col p {
+    font-size: 0.85rem;
+    line-height: 1.6;
+    opacity: 0.85;
+    margin-bottom: 10px;
+}
+
+.footer-desc {
+    margin-top: 15px;
+}
+
+/* Форма за бюлетин */
+.newsletter-form {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-top: 10px;
+}
+
+.glass-input {
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 8px;
+    padding: 10px 14px;
+    color: #fff;
+    outline: none;
+}
+
+.glass-input::placeholder {
+    color: rgba(255, 255, 255, 0.6);
+}
+
+.newsletter-btn {
+    padding: 10px;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    border-radius: 8px;
+    color: #fff;
+    font-weight: bold;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.newsletter-btn:hover {
+    background: rgba(255, 255, 255, 0.25);
+}
+
+/* 3. Авторски права най-долу */
+.footer-bottom {
+    text-align: center;
+    padding: 15px 20px;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    font-size: 0.8rem;
+    letter-spacing: 1px;
+    opacity: 0.75;
+}
+
+/* ОБВИВКА НА ГАЛЕРИЯТА СЪС СТРЕЛКИ */
+.gallery-wrapper {
+    position: relative;
+    display: flex;
+    align-items: center;
+    width: 100%;
+}
+
+.gallery-slider {
+    overflow: hidden;
+    width: 100%;
+    padding: 30px 0; /* Пространство за увеличената снимка */
+}
+
+.gallery-track {
+    display: flex;
+    gap: 20px;
+    width: max-content;
+    animation: scrollGallery 25s linear infinite;
+}
+
+/* При задържане на курсора върху трака – спираме автоматичното движение */
+.gallery-track:hover {
+    animation-play-state: paused;
+}
+
+/* СТИЛ ЗА СНИМКИТЕ И УВЕЛИЧАВАНЕ ПРИ HOVER */
+.gallery-track img {
+    width: 240px;
+    height: 320px;
+    object-fit: cover;
+    border-radius: 18px;
+    border: 1px solid rgba(255, 255, 255, 0.25);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+    transition: transform 0.4s cubic-bezier(0.25, 1, 0.5, 1), box-shadow 0.4s ease, z-index 0.4s;
+    position: relative;
+    z-index: 1;
+    cursor: pointer;
+}
+
+/* Увеличаване на конкретната снимка под курсора */
+.gallery-track img:hover {
+    transform: scale(1.18);
+    z-index: 10;
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.4);
+    border-color: rgba(255, 255, 255, 0.6);
+}
+
+/* СТЪКЛЕНИ СТРЕЛКИ */
+.gallery-arrow {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 20;
+    width: 45px;
+    height: 45px;
+    border-radius: 50%;
+    background: transparent;
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+    box-shadow: none;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    color: #ffffff;
+    font-size: 1.8rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: 0.3s ease;
+}
+
+.left-arrow { left: 10px; }
+.right-arrow { right: 10px; }
+
+.gallery-arrow:hover {
+    background: rgba(255, 255, 255, 0.35);
+    transform: translateY(-50%) scale(1.1);
+}
+
+@keyframes scrollGallery {
+    0% { transform: translateX(0); }
+    100% { transform: translateX(-50%); }
+}
+
+/* ПО-ТЪМЕН, БЛЪРНАТ И КОМПАКТЕН ФУТЪР */
+.footer-section {
+    margin-top: 30px;
+    padding: 0;
+    border-radius: 20px 20px 0 0;
+    color: #ffffff;
+    
+    /* Тъмен нюанс с изразен блър */
+    background: rgba(15, 5, 20, 0.55) !important;
+    backdrop-filter: blur(25px) !important;
+    -webkit-backdrop-filter: blur(25px) !important;
+    border-top: 1px solid rgba(255, 255, 255, 0.15);
+}
+
+/* 1. Горна лента с предимства - компактна */
+.footer-trust-bar {
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+    gap: 10px;
+    padding: 10px 20px !important;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    background: rgba(0, 0, 0, 0.2);
+}
+
+.trust-item {
+    font-size: 0.75rem !important;
+    gap: 6px;
+}
+
+.trust-icon {
+    font-size: 0.85rem;
+}
+
+/* 2. Основно съдържание - намалени височини и отстояние */
+.footer-content {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 20px !important;
+    padding: 20px 25px !important;
+}
+
+.footer-col h4 {
+    font-size: 0.78rem !important;
+    letter-spacing: 1.2px;
+    margin-bottom: 8px !important;
+}
+
+.footer-col p {
+    font-size: 0.75rem !important;
+    line-height: 1.4 !important;
+    margin-bottom: 4px !important;
+    opacity: 0.8;
+}
+
+.footer-desc {
+    margin-top: 8px !important;
+}
+
+/* Форма за абонамент - фина и прибрана */
+.newsletter-form {
+    gap: 6px !important;
+    margin-top: 6px !important;
+}
+
+.glass-input {
+    padding: 6px 10px !important;
+    font-size: 0.75rem !important;
+    border-radius: 6px !important;
+}
+
+.newsletter-btn {
+    padding: 6px 10px !important;
+    font-size: 0.72rem !important;
+    border-radius: 6px !important;
+}
+
+/* 3. Авторска линия Kinetrix Group - дискретна */
+.footer-bottom {
+    padding: 8px 15px !important;
+    font-size: 0.7rem !important;
+    border-top: 1px solid rgba(255, 255, 255, 0.08);
+    background: rgba(0, 0, 0, 0.25);
+    opacity: 0.8;
+}
+
+/* БУТОН "МОЯТ EMY" В ГОРНАТА ЛЕНТА */
+.my-emy-btn {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    padding: 6px 14px;
+    border-radius: 20px;
+    border: 1px solid rgba(255, 255, 255, 0.25);
+    color: #ffffff;
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 1px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.my-emy-btn:hover {
+    background: rgba(255, 255, 255, 0.3);
+    transform: translateY(-1px);
+}
+
+/* МОДАЛЕН ПРОЗОРЕЦ "МОЯТ EMY" */
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(8px);
+    display: none; /* Скрит по подразбиране */
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+}
+
+.modal-overlay.open {
+    display: flex;
+}
+
+.modal-content {
+    width: 90%;
+    max-width: 480px;
+    padding: 30px;
+    border-radius: 20px;
+    position: relative;
+    color: #ffffff;
+    text-align: center;
+}
+
+.close-modal {
+    position: absolute;
+    top: 15px;
+    right: 20px;
+    background: none;
+    border: none;
+    color: #fff;
+    font-size: 1.8rem;
+    cursor: pointer;
+}
+
+.emy-user-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+    margin: 20px 0;
+}
+
+.user-tab-btn {
+    padding: 10px;
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    border-radius: 10px;
+    font-size: 0.8rem;
+    cursor: pointer;
+    opacity: 0.7;
+}
+
+.user-tab-btn.active {
+    opacity: 1;
+    background: rgba(255, 255, 255, 0.25);
+    font-weight: bold;
+}
+
+.coming-soon-text {
+    font-size: 0.85rem;
+    opacity: 0.8;
+    line-height: 1.5;
+    margin-top: 15px;
+}
+
+.cart-btn {
+    display: flex; align-items: center; gap: 5px; padding: 6px 14px;
+    border-radius: 20px; border: 1px solid rgba(255, 255, 255, 0.25);
+    color: #ffffff; font-size: 0.8rem; cursor: pointer; position: relative; transition: all 0.3s ease;
+}
+.cart-btn:hover { background: rgba(255, 255, 255, 0.3); transform: translateY(-1px); }
+.cart-counter {
+    background: #ff007f; color: #fff; font-weight: bold; font-size: 0.65rem;
+    padding: 2px 6px; border-radius: 10px; position: absolute;
+    top: -6px; right: -6px; box-shadow: 0 0 10px rgba(255, 0, 127, 0.6);
+}
+.breadcrumbs {
+    display: flex; gap: 8px; font-size: 0.75rem; color: rgba(255, 255, 255, 0.6);
+    padding: 15px 25px; margin-top: 80px;
+}
+.breadcrumbs a { color: #ffffff; text-decoration: none; transition: color 0.3s; }
+.breadcrumbs a:hover { color: #ff007f; text-shadow: 0 0 8px rgba(255, 0, 127, 0.6); }
+.breadcrumbs span.separator { opacity: 0.5; }
+
+.cookie-banner {
+    position: fixed; bottom: 20px; left: 50%; transform: translateX(-50%);
+    z-index: 9999; display: flex; align-items: center; gap: 15px;
+    padding: 12px 25px; border-radius: 30px; width: max-content; max-width: 90%;
+    font-size: 0.75rem; color: #fff; background: rgba(15, 5, 20, 0.8) !important;
+}
+.cookie-btn {
+    padding: 8px 16px; border-radius: 15px; background: rgba(255, 0, 127, 0.4);
+    border: 1px solid rgba(255, 255, 255, 0.2); color: #fff; cursor: pointer;
+    transition: all 0.3s ease; font-weight: bold;
+}
+.cookie-btn:hover { background: rgba(255, 0, 127, 0.7); }
