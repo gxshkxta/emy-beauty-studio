@@ -8,12 +8,9 @@
     <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
-<<<<<<< HEAD
     <div class="bg-glow blob-1" aria-hidden="true"></div>
     <div class="bg-glow blob-2" aria-hidden="true"></div>
     <div class="bg-glow blob-3" aria-hidden="true"></div>
-=======
->>>>>>> 7c99baa336ac7fcc3cfdc0f605dba41875375046
 
     <header class="topbar glass">
         <div class="brand">
@@ -36,9 +33,9 @@
                 <span>КОНТАКТИ</span>
             </button>
             <button class="cart-btn glass" onclick="openMyEmyModal()" title="Моят EMY">
-    <span>👤</span>
-    <span>МОЯТ EMY</span>
-</button>
+                <span>👤</span>
+                <span>МОЯТ EMY</span>
+            </button>
         </div>
     </header>
 
@@ -78,13 +75,10 @@
             <p onclick="selectCourse('masterclass')">Мастърклас</p>
             <p class="highlight-action" onclick="selectCourse('apply')">ЗАПИШИ СЕ</p>
         </div>
-</nav>
+    </nav>
+
     <main class="main-container">
-<<<<<<< HEAD
         <div class="calendar-wrapper">
-=======
-        <div class="calendar-wrapper glass">
->>>>>>> 7c99baa336ac7fcc3cfdc0f605dba41875375046
             <div class="calendar-header-top">
                 <button class="nav-btn-round glass" onclick="changeMonth(-1)">&#10094;</button>
                 <div class="month-tab glass" id="monthDisplay"></div>
@@ -133,11 +127,7 @@
 
         <div class="gallery-wrapper">
             <!-- Бутон ЛЯВО -->
-<<<<<<< HEAD
             <button class="gallery-arrow left-arrow" onclick="scrollGalleryLeft()">&#8249;</button>
-=======
-            <button class="gallery-arrow left-arrow glass" onclick="scrollGalleryLeft()">&#8249;</button>
->>>>>>> 7c99baa336ac7fcc3cfdc0f605dba41875375046
 
             <div class="gallery-slider" id="gallerySlider">
                 <div class="gallery-track">
@@ -160,11 +150,7 @@
             </div>
 
             <!-- Бутон ДЯСНО -->
-<<<<<<< HEAD
             <button class="gallery-arrow right-arrow" onclick="scrollGalleryRight()">&#8250;</button>
-=======
-            <button class="gallery-arrow right-arrow glass" onclick="scrollGalleryRight()">&#8250;</button>
->>>>>>> 7c99baa336ac7fcc3cfdc0f605dba41875375046
         </div>
     </section>
 
@@ -237,8 +223,18 @@
         <div class="modal-content glass">
             <h3>Запази час</h3>
             <p id="selectedDateText"></p>
-            <input type="text" placeholder="Твоето име">
-            <input type="tel" placeholder="Телефон">
+            <input type="text" class="glass-input" placeholder="Твоето име">
+            <input type="tel" class="glass-input" placeholder="Телефон">
+
+            <!-- Добавено падащо меню за избор на процедура -->
+            <select class="glass-input glass-select">
+                <option value="" disabled selected>Избери процедура...</option>
+                <option value="Manicure">Маникюр</option>
+                <option value="Pedicure">Педикюр</option>
+                <option value="Combined">Комбинирани процедури</option>
+                <option value="Hand Ritual">EMY Care Hand Ritual</option>
+            </select>
+
             <button class="confirm-btn" onclick="sendBooking()">ПОТВЪРДИ</button>
             <button class="cancel-btn" onclick="closeModal()">ОТКАЗ</button>
         </div>
