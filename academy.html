@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="bg">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EMY Academy</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <div class="bg-glow blob-1" aria-hidden="true"></div>
+    <div class="bg-glow blob-2" aria-hidden="true"></div>
+    <div class="bg-glow blob-3" aria-hidden="true"></div>
+    <header class="topbar glass"><div class="brand"><div class="menu-icon glass" onclick="toggleMenu()"><span></span><span></span><span></span></div><a href="index.html" class="logo" style="text-decoration: none; color: inherit;"><span class="logo-text">EMY</span><span class="logo-sub">beauty studio experience</span></a></div></header>
+    <nav id="sideTabs" class="side-tabs floating">
+        <a class="tab-btn" href="index.html" style="text-decoration: none;"><span class="btn-main">НАЧАЛО</span><span class="btn-sub">home page</span></a>
+        <a class="tab-btn" href="index.html" style="text-decoration: none;"><span class="btn-main">STUDIO</span><span class="btn-sub">beauty services</span></a>
+        <a class="tab-btn" href="index.html" style="text-decoration: none;"><span class="btn-main">EMY CARE</span><span class="btn-sub">beauty products</span></a>
+        <a class="tab-btn" href="academy.html" style="text-decoration: none;"><span class="btn-main">EMY ACADEMY</span><span class="btn-sub">professional education</span></a>
+        <div id="academySub" class="sub-menu open"><a class="sub-item" href="#basic-course">Базов курс</a><a class="sub-item" href="#advanced-course">Надграждащ курс</a><a class="sub-item" href="#masterclass">Masterclass</a><a class="sub-item highlight-action" href="#enroll-wizard">ЗАПИШИ СЕ</a></div>
+    </nav>
+    <main class="academy-main">
+        <section class="academy-hero glass" aria-labelledby="academy-title"><p class="academy-eyebrow">ПРОФЕСИОНАЛНО ОБУЧЕНИЕ</p><h1 id="academy-title">EMY ACADEMY</h1><p>Уверени техники, реална практика и знания, които превръщат таланта в професия.</p><a class="academy-enroll-btn" href="#enroll-wizard">ЗАПИСВАНЕ →</a><div class="academy-contact-links"><a href="tel:0877768742">Телефон</a><a href="mailto:emiliq.pavlova@abv.bg">Email</a></div></section>
+        <section class="academy-courses" id="academyCourses" aria-label="Обучения"></section>
+        <section class="academy-wizard glass" id="enroll-wizard" aria-labelledby="wizard-title">
+            <div class="academy-wizard-heading"><p class="academy-eyebrow">ЛИЧНА ПРЕПОРЪКА</p><h2 id="wizard-title">Нека изберем твоето обучение</h2><p>Отговори на два кратки въпроса и ще ти покажем най-подходящия курс.</p></div>
+            <div class="wizard-progress" aria-label="Стъпка от записването"><span class="wizard-progress-step active">1</span><i></i><span class="wizard-progress-step">2</span><i></i><span class="wizard-progress-step">3</span><i></i><span class="wizard-progress-step">4</span><i></i><span class="wizard-progress-step">5</span></div>
+            <div class="wizard-step active" data-wizard-step="1"><h3>Какво искаш да постигнеш?</h3><div class="wizard-options"><button type="button" data-answer-key="goal" data-answer="start">Искам да започна от нулата</button><button type="button" data-answer-key="goal" data-answer="improve">Искам да подобря уменията си</button><button type="button" data-answer-key="goal" data-answer="professional">Искам да работя професионално</button><button type="button" data-answer-key="goal" data-answer="develop">Искам да се развивам</button></div></div>
+            <div class="wizard-step" data-wizard-step="2" hidden><h3>Какъв е твоят опит?</h3><div class="wizard-options"><button type="button" data-answer-key="experience" data-answer="none">Нямам опит</button><button type="button" data-answer-key="experience" data-answer="some">Имам малко опит</button><button type="button" data-answer-key="experience" data-answer="clients">Вече работя с клиенти</button></div></div>
+            <div class="wizard-step" data-wizard-step="3" hidden><h3>Твоето препоръчано обучение</h3><div class="wizard-recommendation" id="wizardRecommendation"></div><button type="button" class="wizard-next" data-next-step="4">Напред</button></div>
+            <div class="wizard-step" data-wizard-step="4" hidden><h3>Какво включва обучението</h3><ul class="wizard-includes"><li>Теория</li><li>Практика</li><li>Професионални материали</li><li>Работа с преподавател</li><li>Сертификат</li></ul><button type="button" class="wizard-next" data-next-step="5">Напред</button></div>
+            <div class="wizard-step" data-wizard-step="5" hidden><h3>Готов ли си да започнеш?</h3><button type="button" class="academy-start-btn" id="showEnrollmentForm">ИСКАМ ДА ЗАПОЧНА</button><form class="academy-enrollment-form" id="academyEnrollmentForm" hidden><label>Име<input name="name" type="text" required></label><label>Телефон<input name="phone" type="tel" required></label><label>Email<input name="email" type="email" required></label><label>Избрано обучение<select name="course" id="enrollmentCourse" required><option value="" disabled>Избери обучение</option><option value="basic">Базов курс</option><option value="advanced">Надграждащ курс</option><option value="masterclass">Masterclass</option></select></label><label>Предпочитан контакт<select name="contact" required><option value="" disabled selected>Избери контакт</option><option>Телефон</option><option>Email</option></select></label><label>Съобщение<textarea name="message" rows="4"></textarea></label><button class="academy-submit-btn" type="submit">ИЗПРАТИ ЗАЯВКА</button><p id="academyFormSuccess" class="academy-form-success" role="status" hidden>Благодарим! Заявката е изпратена успешно.</p></form></div>
+        </section>
+    </main>
+    <footer class="footer-section glass"><div class="footer-bottom"><p>Created by <strong>Kinetrix Group</strong></p><a href="index.html">Към началото</a></div></footer>
+    <script src="js/script.js"></script>
+</body>
+</html>

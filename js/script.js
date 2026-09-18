@@ -2,6 +2,72 @@ const IMAGE_PATH = "assets/images/";
 const PHOTO_COUNT = 19;
 let currentDate = new Date();
 
+const academyData = {
+    basic: { name: 'Базов курс', description: 'Стабилна основа за уверено начало в професионалния маникюр.', audience: 'За начинаещи и любители.', learning: 'Хигиена, подготовка, основни техники и продукти.', practice: 'Упражнения върху модел с обратна връзка.', duration: '2 дни', seats: 6 },
+    advanced: { name: 'Надграждащ курс', description: 'По-прецизна работа, по-бърза техника и уверен резултат.', audience: 'За курсисти с базови умения.', learning: 'Комбинирани техники, корекции и издръжливост.', practice: 'Реални казуси с професионални продукти.', duration: '3 дни', seats: 4 },
+    masterclass: { name: 'Masterclass', description: 'Интензивно обучение за следващо ниво на техника и стил.', audience: 'За напреднали професионалисти.', learning: 'Авторски подходи, сложни дизайни и оптимизация.', practice: 'Демонстрация, задача и персонална обратна връзка.', duration: '1 ден', seats: 2 }
+};
+
+const academyWizardState = { goal: '', experience: '', course: 'basic' };
+
+function renderAcademyCourses() {
+    const coursesContainer = document.getElementById('academyCourses');
+    if (!coursesContainer) return;
+
+    coursesContainer.innerHTML = Object.entries(academyData).map(([key, course]) => `
+        <article class="academy-course-card glass" id="${key === 'basic' ? 'basic-course' : key === 'advanced' ? 'advanced-course' : 'masterclass'}">
+            <div class="academy-course-heading"><h2>${course.name}</h2><span class="seats-counter">Свободни места: <span>${course.seats}</span></span></div>
+            <p class="academy-course-description">${course.description}</p>
+            <dl class="academy-course-details"><div><dt>За кого е</dt><dd>${course.audience}</dd></div><div><dt>Какво се учи</dt><dd>${course.learning}</dd></div><div><dt>Практика</dt><dd>${course.practice}</dd></div><div><dt>Продължителност</dt><dd>${course.duration}</dd></div></dl>
+            <button class="academy-course-cta" type="button" data-course="${key}">Запиши се</button>
+        </article>`).join('');
+
+    coursesContainer.querySelectorAll('[data-course]').forEach(button => {
+        button.addEventListener('click', () => selectAcademyCourse(button.dataset.course));
+    });
+}
+
+function selectAcademyCourse(courseKey) {
+    if (!academyData[courseKey]) return;
+    academyWizardState.course = courseKey;
+    const courseSelect = document.getElementById('enrollmentCourse');
+    if (courseSelect) courseSelect.value = courseKey;
+    const wizard = document.getElementById('enroll-wizard');
+    if (wizard) wizard.scrollIntoView({ behavior: 'smooth', block: 'start' });
+}
+
+function showAcademyStep(stepNumber) {
+    document.querySelectorAll('.wizard-step').forEach(step => {
+        const active = step.dataset.wizardStep === String(stepNumber);
+        step.hidden = !active;
+        step.classList.toggle('active', active);
+    });
+    document.querySelectorAll('.wizard-progress-step').forEach((step, index) => step.classList.toggle('active', index < stepNumber));
+}
+
+function setupAcademyWizard() {
+    const wizard = document.getElementById('enroll-wizard');
+    if (!wizard) return;
+    wizard.querySelectorAll('[data-answer-key]').forEach(button => button.addEventListener('click', () => {
+        academyWizardState[button.dataset.answerKey] = button.dataset.answer;
+        if (button.dataset.answerKey === 'experience') {
+            academyWizardState.course = academyWizardState.experience === 'clients' || academyWizardState.goal === 'professional' ? 'masterclass' : academyWizardState.experience === 'some' || academyWizardState.goal !== 'start' ? 'advanced' : 'basic';
+            const course = academyData[academyWizardState.course];
+            document.getElementById('wizardRecommendation').innerHTML = `<strong>${course.name}</strong><p>${course.description}</p><span>Продължителност: ${course.duration} | Свободни места: ${course.seats}</span>`;
+            const courseSelect = document.getElementById('enrollmentCourse');
+            if (courseSelect) courseSelect.value = academyWizardState.course;
+            showAcademyStep(3);
+        } else showAcademyStep(2);
+    }));
+    wizard.querySelectorAll('[data-next-step]').forEach(button => button.addEventListener('click', () => showAcademyStep(Number(button.dataset.nextStep))));
+    const showForm = document.getElementById('showEnrollmentForm');
+    const form = document.getElementById('academyEnrollmentForm');
+    if (showForm && form) {
+        showForm.addEventListener('click', () => { form.hidden = false; showForm.hidden = true; });
+        form.addEventListener('submit', event => { event.preventDefault(); form.reset(); document.getElementById('enrollmentCourse').value = academyWizardState.course; document.getElementById('academyFormSuccess').hidden = false; });
+    }
+}
+
 // ПОДМЕНЮТА
 function toggleSub(id) {
     document.querySelectorAll('.sub-menu').forEach(menu => {
@@ -115,6 +181,8 @@ function moveManual(dir) {
 document.addEventListener('DOMContentLoaded', () => {
     renderCalendar();
     initGallery();
+    renderAcademyCourses();
+    setupAcademyWizard();
     const wrap = document.getElementById('galleryWrap');
     if (wrap) {
         wrap.addEventListener('mouseenter', () => isPaused = true);
