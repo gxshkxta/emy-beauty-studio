@@ -129,6 +129,9 @@ body::before {
 }
 
 .side-tabs .tab-btn {
+    position: relative;
+    z-index: 10;
+    pointer-events: auto;
     width: 100%;
     padding: 10px 18px !important;
     margin-bottom: 6px !important;
